@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendor — весь товар торговца в одном окне для WoW 3.3.5a</title>
+<meta name="description" content="Vendor — аддон для World of Warcraft 3.3.5a: весь товар торговца одним прокручиваемым списком вместо страниц по десять. Наборы по слотам, группы, фильтр «не моё», покупка пачкой x5/x20/x100 и цепочки обмена эмблем одной кнопкой.">
+<link rel="canonical" href="https://wow-addons.manacode.su/vendor/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/vendor/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/vendor/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/vendor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vendor — весь товар торговца в одном окне">
+<meta property="og:description" content="Без страниц по десять: наборы, группы, фильтр, покупка пачкой и обмен эмблем. WoW 3.3.5a.">
+<meta property="og:url" content="https://wow-addons.manacode.su/vendor/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/vendor/emblems.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/vendor/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--vendor">
+
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon mark__icon--smooth" src="/assets/vendor/icon.svg" width="32" height="32" alt="">
+        <span class="mark__word">Vendor</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#shots">Кадры</a>
+        <a href="#features">Возможности</a>
+        <a href="#install">Установка</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-Vendor">GitHub</a>
+        <a class="lang" href="/en/vendor/" hreflang="en" lang="en">EN</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            Аддон для WoW 3.3.5a &middot; версия 0.1
+        </p>
+        <h1>Весь товар торговца в одном окне.</h1>
+        <p class="lede">
+            Вместо страниц по десять — один прокручиваемый список, разложенный
+            по группам под этого торговца. Окно открывается само, когда
+            заговоришь с торговцем.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-Vendor/releases/latest">Скачать</a>
+            <a class="btn" href="#install">Как поставить</a>
+        </div>
+        <ul class="clients" aria-label="Поддерживаемые клиенты">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">русский и английский</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="наборы у торговца">
+        <a href="/assets/vendor/sets.jpg" target="_blank" rel="noopener">
+            <img src="/assets/vendor/sets.jpg" width="1434" height="1298" alt="Торговец наборами: доспехи повелителя Плети по слотам, ступени T10.1, T10.2, T10.3 в ряд, галочки на том, что уже есть">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Команды">
+    <h2 class="cmds__head">Команды</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/vendor off</code></dt>
+            <dd>Вернуть штатное окно торговца. Обратно — <code>/vendor on</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor theme flat</code></dt>
+            <dd>Плоское тёмное оформление. Текстуры клиента — <code>/vendor theme vanilla</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor reset</code></dt>
+            <dd>Забыть размеры окон у всех торговцев.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor about</code></dt>
+            <dd>Версия, ссылки и другие аддоны manacode. Просто <code>/vendor</code> — состояние аддона.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf shelf--dark" id="shots" aria-label="Кадры">
+    <div class="shelf__in">
+        <h2 class="h-section">У каждого торговца — своя раскладка</h2>
+        <p class="lede">
+            Группы выбираются по товару, а не по имени торговца: эмблемы, камни,
+            рецепты и маунты разложены каждый по-своему.
+        </p>
+
+        <div class="frames frames--three">
+            <figure class="frame">
+                <a href="/assets/vendor/emblems.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/emblems.jpg" alt="Награды за эмблемы льда: обмен, набор гладиатора A7, броня по типам, плащи" loading="lazy">
+                </a>
+                <figcaption>Эмблемы</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/gems.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/gems.jpg" alt="Ювелирные эскизы: красные, жёлтые, зелёные, особые камни колонками" loading="lazy">
+                </a>
+                <figcaption>Ювелирка</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/recipes.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/recipes.jpg" alt="Торговец формулами чар: группы по слоту, красный — не хватает навыка" loading="lazy">
+                </a>
+                <figcaption>Рецепты</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/exchange.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/exchange.jpg" alt="Цепочка обмена: эмблемы героизма в доблести и завоевания одним окном" loading="lazy">
+                </a>
+                <figcaption>Обмен эмблем</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/filter.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/filter.jpg" alt="Фильтр и вид: не моё — чужой класс, профессия, характеристики, припасы" loading="lazy">
+                </a>
+                <figcaption>Фильтр</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/mounts.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/mounts.jpg" alt="Торговец маунтами: скорость прямо под именем" loading="lazy">
+                </a>
+                <figcaption>Маунты</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="h-section"><span class="h-section__num">Возможности</span> Найти, проверить, купить</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Наборы — матрицей</h4>
+            <p>
+                Тиры и арена собраны в набор: слот строкой, ступени улучшений
+                рядом, короткие метки T10.2 и A7. Повтор в именах снимается —
+                полное имя остаётся в подсказке и в поиске.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Группы под торговца</h4>
+            <p>
+                Камни по цвету, броня по типу, рецепты по тому, что делают,
+                товар интенданта по рангам репутации. Поиск по имени понимает и
+                неверную раскладку.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Фильтр «не моё»</h4>
+            <p>
+                Чужой класс, не та броня и характеристики, реагенты чужих
+                профессий, старые ранги, слабая еда. Отметил раз — на прилавке
+                остаётся только твоё.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Что уже есть и хватит ли</h4>
+            <p>
+                Галочка на том, что лежит в сумках, банке или надето. Цена
+                красная, если не хватает, а подсказка «Для чего» говорит, какому
+                рецепту нужен реагент.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Пачкой x5, x20, x100</h4>
+            <p>
+                Наведи на вещь — кнопки пачки. Перед покупкой видно, сколько
+                стопок ляжет в сумки и сколько это стоит.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Обмен эмблем одной кнопкой</h4>
+            <p>
+                Весь путь до нужной эмблемы или вещи — одной строкой. Эмблемы,
+                что уже есть на середине пути, идут в ход первыми.
+            </p>
+        </li>
+    </ol>
+
+    <ul class="facts">
+        <li>Продажа серого хлама</li>
+        <li>Выкуп на своей вкладке</li>
+        <li>Починка своими и из банка гильдии</li>
+        <li>Возврат за эмблемы по ПКМ, и в Bagnon</li>
+        <li>Плитки или строки, два оформления</li>
+        <li>Размер окна у каждого торговца свой</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Установка">
+    <h2 class="h-section"><span class="h-section__num">Установка</span> Как поставить</h2>
+    <p class="lede">
+        Два пути: обновлялка ставит и обновляет сама, архив — вручную.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>ManacodeUpdate</h3>
+            <ol class="steps">
+                <li>Скачать и запустить обновлялку.</li>
+                <li>У Vendor нажать «Установить».</li>
+                <li>Зайти в игру и заговорить с торговцем.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Update/releases/latest">Скачать обновлялку</a>
+        </article>
+        <article class="setup__card">
+            <h3>Вручную</h3>
+            <ol class="steps">
+                <li>Скачать архив со страницы релиза.</li>
+                <li>Распаковать сюда: <code class="path">папка клиента\Interface\AddOns</code></li>
+                <li>Полностью перезапустить игру и заговорить с торговцем.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Vendor/releases/latest">Релизы на GitHub</a>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Обратная связь</p>
+        <p>
+            Аддоном пока пользуется немного игроков — дорабатывается по
+            отзывам. Ошибку, странность или идею — в
+            <a href="https://discord.gg/CYnxS6R9qY">Discord</a> или в
+            <a href="https://github.com/dmitriinosach/-MANACODE-Vendor/issues">задачи на GitHub</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Vendor</p>
+    <p>Разработчик — manacode. Аддон не связан с Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/">Другие аддоны manacode</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-Vendor">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

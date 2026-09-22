@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Waiting Arcade — двадцать игр внутри WoW, пока собирается рейд</title>
+<meta name="description" content="Raid Waiting Arcade — аддон для World of Warcraft: двадцать мини-игр в окне клиента. Работает на 3.3.5a и на ретейле Midnight. Прячется в бою, встаёт на паузу по проверке готовности, не отбирает чат. В шахматы, шашки, «Пары» и «Сундучки» можно сыграть вдвоём. Бета.">
+<link rel="canonical" href="https://wow-addons.manacode.su/arcade/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/arcade/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/arcade/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/arcade/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raid Waiting Arcade — игры внутри WoW">
+<meta property="og:description" content="Двадцать мини-игр в окне клиента, пока собирается рейд. 3.3.5a и ретейл Midnight. Бета.">
+<meta property="og:url" content="https://wow-addons.manacode.su/arcade/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/arcade/menu.jpg">
+<link rel="icon" type="image/png" href="/assets/tex/arcade_icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--arcade">
+
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon" src="/assets/tex/arcade_icon.png" width="32" height="32" alt="">
+        <span class="mark__word">Raid Waiting Arcade</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#games">Игры</a>
+        <a href="#duo">Вдвоём</a>
+        <a href="#rules">Про рейд</a>
+        <a href="#install">Установка</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade">GitHub</a>
+        <a class="lang" href="/en/arcade/" hreflang="en" lang="en">EN</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            Аддон для WoW &middot; бета
+        </p>
+        <h1>От пяти до двадцати минут между «зашёл» и «пошли».</h1>
+        <p class="lede">
+            Уйти из клиента нельзя: потеряешь приглашение и голосовой сбор.
+            Альт-табнуться в браузер — пропустить и то и другое. Аркада занимает
+            это время внутри игры: двадцать партий на несколько минут, и каждую
+            можно бросить на полуслове.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/releases">Скачать бету</a>
+            <a class="btn" href="#install">Как поставить</a>
+        </div>
+        <ul class="clients" aria-label="Поддерживаемые клиенты">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">Retail &middot; Midnight</li>
+            <li>другие клиенты — скоро</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="меню аркады">
+        <a href="/assets/arcade/menu.jpg" target="_blank" rel="noopener">
+            <img src="/assets/arcade/menu.jpg" width="1280" height="1048" alt="Окно аркады: двадцать плиток с играми">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Команды">
+    <h2 class="cmds__head">Команды</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/arc</code></dt>
+            <dd>Открыть или закрыть окно. То же делают <code>/arcade</code> и значок у миникарты.</dd>
+        </div>
+        <div>
+            <dt><code>/arc chess</code></dt>
+            <dd>
+                Сразу в игру, мимо меню. Подставь свою:
+                <span class="cmds__ids">apothecary arkanoid breaker checkers chess gems gofish invaders jump merge mines pairs recipe slide snake solitaire stack sudoku tetris tower</span>
+            </dd>
+        </div>
+        <div>
+            <dt><code>/arc about</code></dt>
+            <dd>Окно со ссылками: релизы, Discord. Открыть ссылку клиент не умеет, поэтому адрес встаёт выделенным под Ctrl+C.</dd>
+        </div>
+        <div>
+            <dt><code>/arc broken</code></dt>
+            <dd>Какие игры отключились из-за ошибки и почему. Пригодится, когда пишешь о баге.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf" id="games" aria-label="Игры">
+    <div class="shelf__in">
+        <h2 class="h-section">Двадцать, и ни одной на весь вечер</h2>
+        <p class="lede">
+            Головоломки, карты, реалтайм и игры с соперником. Партия сохраняется
+            по Esc и переживает <code>/reload</code>: бросить её ничего не стоит.
+        </p>
+
+        <div class="frames">
+            <figure class="frame">
+                <a href="/assets/arcade/gems.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/gems.jpg" alt="Меню игры «Три в ряд»: режимы, камни поля и особые камни" loading="lazy">
+                </a>
+                <figcaption>Три в ряд</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/solitaire.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/solitaire.jpg" alt="Раскладка пасьянса «Свободная ячейка»" loading="lazy">
+                </a>
+                <figcaption>Пасьянс</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/tower.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/tower.jpg" alt="Кран опускает этаж на небоскрёб" loading="lazy">
+                </a>
+                <figcaption>Стройка</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/gofish.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/gofish.jpg" alt="Гоблин-барыга за карточным столом" loading="lazy">
+                </a>
+                <figcaption>Сундучки</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/invaders.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/invaders.jpg" alt="Строй врагов над кораблём игрока" loading="lazy">
+                </a>
+                <figcaption>Захватчики</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/stack.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/stack.jpg" alt="Склад с ящиками и грузчиком" loading="lazy">
+                </a>
+                <figcaption>Кладовщик</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/jump.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/jump.jpg" alt="Персонаж прыгает по платформам вверх" loading="lazy">
+                </a>
+                <figcaption>Джампер</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/recipe.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/recipe.jpg" alt="Поле подбора тайного рецепта из реагентов" loading="lazy">
+                </a>
+                <figcaption>Рецепт</figcaption>
+            </figure>
+        </div>
+
+        <h3 class="games__head">Все двадцать</h3>
+        <ul class="gtiles">
+            <li class="gtile"><b>Аптекарь</b><span>Разлить травы по колбам так, чтобы каждый цвет остался только в одной.</span></li>
+            <li class="gtile"><b>Арканоид</b><span>Уровни идут один за другим, пока есть мячи. За золотыми стенами — камеры с капсулами.</span></li>
+            <li class="gtile"><b>Джампер</b><span>Персонаж прыгает сам, стрелки ведут его вбок. Забраться повыше.</span></li>
+            <li class="gtile"><b>Захватчики</b><span>Волны врагов сверху: строй, стаи, кольцо, дождь, осада. Огонь сам, пробел — способность.</span></li>
+            <li class="gtile"><b>Змейка</b><span>Съесть еду, не врезаться в стену и не откусить себе хвост.</span></li>
+            <li class="gtile"><b>Кладовщик</b><span>Толкать ящики под краном, заваливать ямы и собирать целый ряд.</span></li>
+            <li class="gtile gtile--duo"><b>Пары</b><i>вдвоём</i><span>Игра на память: открывать карточки по две и находить одинаковые.</span></li>
+            <li class="gtile"><b>Пасьянс</b><span>Косынка, Свободная ячейка и Юкон: разобрать раскладку по мастям.</span></li>
+            <li class="gtile"><b>Пятнашки</b><span>Картинка разрезана и перемешана. Плитки сдвигаются в пустую клетку.</span></li>
+            <li class="gtile"><b>Рецепт</b><span>Подобрать тайный рецепт из нескольких щепотей: варить смесь и читать ответ.</span></li>
+            <li class="gtile"><b>Сапёр</b><span>Разминировать поле: число на клетке говорит, сколько мин рядом.</span></li>
+            <li class="gtile"><b>Слияние</b><span>Сдвигать поле стрелками: два одинаковых зелья дают следующий рецепт.</span></li>
+            <li class="gtile"><b>Стройка</b><span>Кран качает этаж на тросе. Точная посадка селит полный этаж жильцов.</span></li>
+            <li class="gtile"><b>Судоку</b><span>Цифры 1–9 без повторов в строке, в столбце и в квадрате.</span></li>
+            <li class="gtile gtile--duo"><b>Сундучки</b><i>вдвоём</i><span>Карточная игра на память: против персонажа за столом или против друга.</span></li>
+            <li class="gtile"><b>Тетрис</b><span>Поле 10 на 20: фигуры падают, заполненные линии исчезают.</span></li>
+            <li class="gtile"><b>Три в ряд</b><span>Менять местами соседние камни и собирать линии от трёх одинаковых.</span></li>
+            <li class="gtile"><b>Шарики</b><span>Убирать связные группы камней. Чем больше группа, тем больше очков.</span></li>
+            <li class="gtile gtile--duo"><b>Шахматы</b><i>вдвоём</i><span>Обычные шахматы с живым человеком: бота у них нет.</span></li>
+            <li class="gtile gtile--duo"><b>Шашки</b><i>вдвоём</i><span>Русские шашки с ботом или с напарником: бой обязателен.</span></li>
+        </ul>
+    </div>
+</section>
+
+<section class="hub__more" id="duo" aria-label="Вдвоём">
+    <h2 class="h-section"><span class="h-section__num">Вдвоём</span> Сыграйте партию с другом</h2>
+
+    <figure class="scene">
+        <img src="/assets/arcade/duo.svg" width="1120" height="500" alt="Двое игроков сидят на скамейке в Даларане, у каждого открыто окно аркады с одной и той же шахматной партией" loading="lazy">
+    </figure>
+
+    <ol class="flow">
+        <li><b>Зайдите в аддон вдвоём</b>Аркада нужна обоим.</li>
+        <li><b>Позовите в игру</b>Один приглашает, второй жмёт «Да».</li>
+        <li><b>Играйте партию</b>Не успели — доиграете потом.</li>
+    </ol>
+
+    <p class="duo__req">Шахматы, шашки, «Пары» и «Сундучки». Нужно быть в одной локации, слое или инсте.</p>
+</section>
+
+<section class="features" id="rules">
+    <h2 class="h-section"><span class="h-section__num">Про рейд</span> Чего она не сделает с твоим вечером</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Вошёл в бой — партия встала</h4>
+            <p>
+                Партия ставится на паузу, окно уходит с экрана само — за это
+                отвечает галочка «Прятать в бою». Обратно возвращает человек, а
+                не аддон: автовозврата нет, чтобы игра не всплыла посреди пула.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Ready check не пропустишь</h4>
+            <p>
+                Проверка готовности и приглашение в группу ставят партию на
+                паузу, но окно остаётся: видно, что сбор идёт и что он идёт без
+                тебя, пока не нажал.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Чат остаётся твоим</h4>
+            <p>
+                Окно не забирает клавиатуру: Enter открывает чат, Esc закрывает
+                аркаду. Играм отдаются стрелки и пробел, и только на время
+                партии; клавиши переназначаются, а большинство игр играется
+                одной мышью.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Закрытое окно не делает ничего</h4>
+            <p>
+                Скрытая аркада снимает игровой цикл, а не крутит его вхолостую.
+                Аддон, который ест кадры, пока в него не играют, — это не
+                аркада, а налог.
+            </p>
+        </li>
+    </ol>
+</section>
+
+<section class="hub__more" id="look" aria-label="Оформление">
+    <h2 class="h-section"><span class="h-section__num">Оформление</span> Выглядит как часть клиента</h2>
+    <p class="lede">
+        Игры одеты в вещи из самого WoW: иконки берутся у клиента по
+        идентификатору предмета, а не рисуются заново. Окно — в одном из шести
+        оформлений: Пергамент, Тёмное золото, Свиток, Камень, Сланец, Плоский.
+    </p>
+
+    <div class="pair">
+        <figure class="shot">
+            <a href="/assets/arcade/menu.jpg" target="_blank" rel="noopener">
+                <img src="/assets/arcade/menu.jpg" alt="Меню аркады в тёплом оформлении" loading="lazy">
+            </a>
+            <figcaption>«Пергамент»: тёплое дерево и золото.</figcaption>
+        </figure>
+        <figure class="shot">
+            <a href="/assets/arcade/menu-slate.jpg" target="_blank" rel="noopener">
+                <img src="/assets/arcade/menu-slate.jpg" alt="Меню аркады в оформлении «Сланец»" loading="lazy">
+            </a>
+            <figcaption>«Сланец»: холодный камень и сталь.</figcaption>
+        </figure>
+    </div>
+
+    <ul class="facts">
+        <li>Русский и английский</li>
+        <li>Масштаб окна и прозрачное окно</li>
+        <li>Звук, эффекты и музыка — отдельными галочками</li>
+        <li>У игр свои темы: какими предметами рисуется партия</li>
+        <li>Значок у миникарты или на экране</li>
+        <li>Рекорды по каждой игре и режиму</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Установка">
+    <h2 class="h-section"><span class="h-section__num">Установка</span> Как поставить</h2>
+    <p class="lede">
+        Архив один на оба клиента — <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/releases">со страницы релизов на GitHub</a>.
+        Внутри одна папка — её и кладём.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>3.3.5a &middot; WotLK</h3>
+            <ol class="steps">
+                <li>Закрыть игру.</li>
+                <li>Положить папку сюда: <code class="path">папка клиента\Interface\AddOns</code></li>
+                <li>Зайти в игру и набрать <code>/arc</code>.</li>
+            </ol>
+        </article>
+        <article class="setup__card">
+            <h3>Retail &middot; Midnight</h3>
+            <ol class="steps">
+                <li>Закрыть игру.</li>
+                <li>Положить папку сюда: <code class="path">World of Warcraft\_retail_\Interface\AddOns</code></li>
+                <li>Зайти в игру и набрать <code>/arc</code>.</li>
+            </ol>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Бета</p>
+        <p>
+            Все двадцать игр на месте, но это первая публичная сборка: что-то
+            обязательно всплывёт. Ошибку, странность или идею — в
+            <a href="https://discord.gg/CYnxS6R9qY">Discord</a> или в
+            <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/issues">задачи на GitHub</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Raid Waiting Arcade</p>
+    <p>Разработчик — manacode. Аддон не связан с Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/">Другие аддоны manacode</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

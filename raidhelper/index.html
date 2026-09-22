@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Helper — разбор рейда по боевому логу для WoW 3.3.5a</title>
+<meta name="description" content="Raid Helper — аддон для World of Warcraft 3.3.5a: разбор рейда по боевому логу прямо в игре. Смерти с причинами, косяки на механиках, таймлайн каждого игрока, угроза, 3D-реплей залов, сводка рейда с расходниками, ГП и сбор состава.">
+<link rel="canonical" href="https://wow-addons.manacode.su/raidhelper/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/raidhelper/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/raidhelper/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/raidhelper/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raid Helper — разбор рейда для WoW 3.3.5a">
+<meta property="og:description" content="Что случилось на вайпе и с кого он начался: смерти, косяки, таймлайн и 3D-реплей прямо в игре.">
+<meta property="og:url" content="https://wow-addons.manacode.su/raidhelper/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/raidhelper/summary.jpg">
+<link rel="icon" type="image/png" href="/assets/raidhelper/icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--raidhelper">
+
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon mark__icon--smooth" src="/assets/raidhelper/icon.png" width="32" height="32" alt="">
+        <span class="mark__word">Raid Helper</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#shots">Кадры</a>
+        <a href="#features">Возможности</a>
+        <a href="#install">Установка</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper">GitHub</a>
+        <a class="lang" href="/en/raidhelper/" hreflang="en" lang="en">EN</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            Аддон для WoW 3.3.5a &middot; версия 1.7
+        </p>
+        <h1>Что случилось на вайпе и с кого он начался.</h1>
+        <p class="lede">
+            Метр отвечает «сколько». Raid Helper отвечает «что и когда»: кто
+            словил механику, кого перестали лечить, чья смерть потянула за
+            собой рейд. Разбор открывается сразу после боя, не выходя из игры.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/releases/latest">Скачать</a>
+            <a class="btn" href="#install">Как поставить</a>
+        </div>
+        <ul class="clients" aria-label="Поддерживаемые клиенты">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">русский и английский</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="сводка попытки">
+        <a href="/assets/raidhelper/summary.jpg" target="_blank" rel="noopener">
+            <img src="/assets/raidhelper/summary.jpg" width="1600" height="897" alt="Сводка попытки на Профессоре Мерзоциде: косяки с ГП, урон по слизнякам, карточки игроков">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Команды">
+    <h2 class="cmds__head">Команды</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/mrh</code></dt>
+            <dd>Открыть или закрыть окно. То же — кнопки на маленькой панели.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh raid</code></dt>
+            <dd>Сразу на вкладку. Есть ещё <code>log</code> — разбор, <code>spam</code> — спамер сбора, <code>gp</code> — косяки и ГП.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh status</code></dt>
+            <dd>Идёт ли запись и сколько занято. Включить и выключить — <code>/mrh on</code>, <code>/mrh off</code>, <code>/mrh pause</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh help</code></dt>
+            <dd>Все команды в чат.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf shelf--dark" id="shots" aria-label="Кадры">
+    <div class="shelf__in">
+        <h2 class="h-section">Весь вечер — попытка за попыткой</h2>
+        <p class="lede">
+            Запись включается сама в рейдовом подземелье. После боя разбор уже
+            готов: щёлкни по попытке слева.
+        </p>
+
+        <div class="frames frames--wide">
+            <figure class="frame">
+                <a href="/assets/raidhelper/replay-lichking.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/replay-lichking.jpg" alt="3D-реплей Короля-лича: валькиры уносят игроков, лента событий слева" loading="lazy">
+                </a>
+                <figcaption>3D-реплей</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/death.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/death.jpg" alt="Подсказка о смерти: урон и лечение за последние секунды, мини-карта места" loading="lazy">
+                </a>
+                <figcaption>Смерть</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/timeline.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/timeline.jpg" alt="Таймлайн игрока на Синдрагосе: касты, ауры, урон, кривая здоровья" loading="lazy">
+                </a>
+                <figcaption>Таймлайн</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/raid-summary.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/raid-summary.jpg" alt="Сводка рейда ЦЛК: время, вайпы, урон, расходники, награды" loading="lazy">
+                </a>
+                <figcaption>Сводка рейда</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/replay-putricide.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/replay-putricide.jpg" alt="3D-реплей Профессора Мерзоцида: слизни, газовое вздутие, игроки на полу" loading="lazy">
+                </a>
+                <figcaption>Мерзоцид</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/mindcontrol.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/mindcontrol.jpg" alt="Подсказка о контроле разума на Леди Смертный Шёпот: урон по своим и что сняло контроль" loading="lazy">
+                </a>
+                <figcaption>Контроль разума</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/board.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/board.jpg" alt="Сбор рейда: танки, лекари, ближний и дальний бой по колонкам" loading="lazy">
+                </a>
+                <figcaption>Сбор состава</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/spammer.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/spammer.jpg" alt="Спамер сбора: шаблон сообщения, нужные спеки, каналы" loading="lazy">
+                </a>
+                <figcaption>Спамер</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="h-section"><span class="h-section__num">Возможности</span> Разбор, который не нужно выгружать</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Сводка попытки</h4>
+            <p>
+                Итог, ДПС и ХПС рейда, смерти и механики босса компактными
+                таблицами: урон по аддам и валькирам, стаки, лужи, сбития.
+                Правила для ЦЛК, Рубинового святилища и Испытания крестоносца.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Смерти с причинами</h4>
+            <p>
+                Последние удары перед смертью, какие защитные были готовы и
+                где стоял игрок. На вайпе — с кого он начался.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Таймлайн и угроза</h4>
+            <p>
+                Касты, ауры, входящий урон и кривая здоровья каждого на одной
+                полосе. Угроза пишется как у Omen: кто держал врага, срывы и
+                таунты.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>3D-реплей</h4>
+            <p>
+                Бой заново на полу зала: игроки, босс, адды, лужи и конусы.
+                Залы ЦЛК, Рубинового святилища и Испытания крестоносца — из
+                геометрии самого клиента. Скорость от x0,5 до x8.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Сводка рейда</h4>
+            <p>
+                Весь вечер в одном окне: боссы, вайпы, время в бою и простой,
+                расходники по игрокам и их цена в золоте, награды рейда —
+                от «Громоотвода» до «Любителя луж».
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Косячница</h4>
+            <p>
+                Ошибки на механиках превращаются в ГП, ЕП, ДКП или штраф к
+                роллу — с пруфом в чат. EPGP и Quick DKP V2, свои правила и
+                журнал с отменой.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Сбор рейда</h4>
+            <p>
+                Спамер в каналы, шаблоны рейда, автоинвайт по «+», состав по
+                группам и ожидаемый ДПС. На проверке готовности видно, у кого
+                нет бафов, фласки или еды.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Всегда под рукой</h4>
+            <p>
+                Мини-окно: ДПС в бою, косяки после. Панель с графиками ДПС и
+                ХПС и банками рейда. КД персонажей и гильдии на отдельной
+                вкладке.
+            </p>
+        </li>
+    </ol>
+
+    <ul class="facts">
+        <li>Итог рейда в Discord одной кнопкой</li>
+        <li>Ссылка на попытку открывает её у соседа</li>
+        <li>Цены расходников — свой скан или Auctionator</li>
+        <li>Три темы и масштаб окна</li>
+        <li>Русский и английский</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Установка">
+    <h2 class="h-section"><span class="h-section__num">Установка</span> Как поставить</h2>
+    <p class="lede">
+        Два пути: обновлялка ставит и обновляет сама, архив — вручную.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>ManacodeUpdate</h3>
+            <ol class="steps">
+                <li>Скачать и запустить обновлялку.</li>
+                <li>У Raid Helper нажать «Установить».</li>
+                <li>3D-залы — «3D-залы реплея» → «Применить».</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Update/releases/latest">Скачать обновлялку</a>
+        </article>
+        <article class="setup__card">
+            <h3>Вручную</h3>
+            <ol class="steps">
+                <li>Скачать архив: полный — с 3D-залами, lite — без них.</li>
+                <li>Распаковать сюда: <code class="path">папка клиента\Interface\AddOns</code></li>
+                <li>Полностью перезапустить игру и набрать <code>/mrh</code>.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/releases/latest">Релизы на GitHub</a>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Король-лич</p>
+        <p>
+            Клиент 3.3.5 теряет позиции на платформе Лича после «Сотрясения».
+            Патч клиента лежит в архиве релиза с инструкцией, а в обновлялке это
+            одна кнопка — «Починить позиции на Личе». Нужен только тому, кто пишет бой.
+        </p>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Обратная связь</p>
+        <p>
+            Ошибку, странность или идею — в
+            <a href="https://discord.gg/CYnxS6R9qY">Discord</a> или в
+            <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/issues">задачи на GitHub</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Raid Helper</p>
+    <p>Разработчик — manacode. Аддон не связан с Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/">Другие аддоны manacode</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

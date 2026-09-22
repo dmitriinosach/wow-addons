@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>howToPlay — аддон, с которым можно вернуться в игру</title>
+<meta name="description" content="howToPlay: подсказывает ротацию, таланты, капы и тактику босса под твой класс и роль. WotLK 3.3.5a, всё на русском.">
+<link rel="canonical" href="https://wow-addons.manacode.su/htp/">
+<link rel="icon" type="image/png" href="/assets/tex/arcade_icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <span class="mark__glyph" aria-hidden="true">✦</span>
+        <span class="mark__word">howToPlay</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#features">Что умеет</a>
+        <a href="#talk">Отзывы</a>
+        <a href="/arcade/">Аркада</a>
+        <a href="/">Все аддоны</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">WotLK 3.3.5a &middot; всё на русском</p>
+        <h1>Вернуться в игру.<br>Или начать<br>с нуля.</h1>
+        <p class="lede">
+            howToPlay держит в окне всё, за чем обычно лезут на форум: что жать,
+            куда вкладывать таланты, сколько нужно рейтинга, что делать на боссе
+            и что с него надеть. Под твой класс, твой спек и твою роль.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="#" data-link="guide-download">Скачать</a>
+            <a class="btn" href="#features">Что внутри</a>
+        </div>
+    </div>
+
+    <figure class="tip tip--hero" aria-label="Пример подсказки в стиле игровой всплывающей рамки">
+        <p class="tip__name tip__name--epic">howToPlay</p>
+        <p class="tip__kind">Основной аддон &middot; подсказки по игре</p>
+        <ul class="tip__stats">
+            <li>Билд под твой класс и спек</li>
+            <li>Тактика босса под твою роль</li>
+            <li>Бислист, софты, кулдауны</li>
+        </ul>
+        <p class="tip__use">Использование: открыть окно и играть дальше.</p>
+        <p class="tip__flavor">«Не помню, что жать после Мора» — и не надо помнить.</p>
+    </figure>
+</section>
+
+<section class="tour" id="tour" aria-roledescription="карусель" aria-label="Что аддон даёт разным классам">
+    <div class="tour__head">
+        <h2 class="h-section"><span class="h-section__num">По классам</span> Каждому своё</h2>
+        <div class="tour__nav">
+            <button class="tour__arrow" data-tour="prev" aria-label="Предыдущий класс">←</button>
+            <div class="tour__dots" role="tablist" aria-label="Классы"></div>
+            <button class="tour__arrow" data-tour="next" aria-label="Следующий класс">→</button>
+        </div>
+    </div>
+
+    <div class="tour__stage">
+        <article class="slide" data-class="priest" aria-label="Слайд 1 из 6">
+            <figure class="hero-art">
+                <img src="/assets/heroes/priest-shadow2.png" alt="Жрец в облике тьмы" loading="lazy">
+                <figcaption><b>Жрец</b><span>Тьма</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/talents1.png" target="_blank" rel="noopener">
+                        <img src="/assets/shots/talents1.png" alt="Вкладка «Таланты → Стандартные»: ветки по гайдам" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Ветка по гайдам — в один клик</h3>
+                <p class="slide__text">
+                    Не нужно разбираться, куда класть 71 очко: готовые ветки лежат
+                    рядом с деревом, применяются кнопкой и подписаны, для чего они.
+                    Дальше можно править под себя.
+                </p>
+            </div>
+        </article>
+
+        <article class="slide" data-class="warrior" hidden aria-label="Слайд 2 из 6">
+            <figure class="hero-art">
+                <img src="/assets/heroes/warrior-fury.png" alt="Воин в облике неистовства" loading="lazy">
+                <figcaption><b>Воин</b><span>Неистовство</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/talents.jpg" target="_blank" rel="noopener">
+                        <img src="/assets/shots/talents.jpg" alt="Вкладка «Билд»: дерево талантов и свои сборки" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Капы считаются по твоим вещам</h3>
+                <p class="slide__text">
+                    Сколько нужно попадания и мастерства, сколько уже есть и
+                    сколько урона теряешь, пока не добрал. По надетому, а не по
+                    табличке из чужого гайда.
+                </p>
+            </div>
+        </article>
+
+        <article class="slide" data-class="druid" hidden aria-label="Слайд 3 из 6">
+            <figure class="hero-art">
+                <img src="/assets/heroes/druid.png" alt="Друид в облике восстановления" loading="lazy">
+                <figcaption><b>Друид</b><span>Восстановление</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/talents.jpg" target="_blank" rel="noopener">
+                        <img src="/assets/shots/talents.jpg" alt="Вкладка «Билд»: дерево талантов и свои сборки" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Капы считаются по твоим вещам</h3>
+                <p class="slide__text">
+                    Сколько нужно попадания и мастерства, сколько уже есть и
+                    сколько урона теряешь, пока не добрал. По надетому, а не по
+                    табличке из чужого гайда.
+                </p>
+            </div>
+        </article>
+
+        <article class="slide" data-class="mage" hidden aria-label="Слайд 4 из 6">
+            <figure class="hero-art">
+                <img src="/assets/heroes/mage.png" alt="Маг в облике огня" loading="lazy">
+                <figcaption><b>Маг</b><span>Огонь</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/tactics.jpg" target="_blank" rel="noopener">
+                        <img src="/assets/shots/tactics.jpg" alt="Окно howToPlay: тактика босса" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Опенер цепочкой иконок</h3>
+                <p class="slide__text">
+                    Первые секунды боя показаны по шагам, дальше — приоритет
+                    кнопок. Не абзац текста, который в бою всё равно не читают.
+                </p>
+            </div>
+        </article>
+
+        <article class="slide" data-class="paladin" hidden aria-label="Слайд 5 из 6">
+            <figure class="hero-art ">
+                <img class="paladin" src="/assets/heroes/pala.png" alt="Паладин в облике света" loading="lazy">
+                <figcaption><b>Паладин</b><span>Свет</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/tactics.jpg" target="_blank" rel="noopener">
+                        <img src="/assets/shots/tactics.jpg" alt="Тактика босса для своей роли" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Тактика под свою роль</h3>
+                <p class="slide__text">
+                    Хилу на боссе нужно другое, чем танку. Текст разный для каждой
+                    роли и разложен по фазам, а не свален в общий пересказ.
+                </p>
+            </div>
+        </article>
+
+        <article class="slide" data-class="deathknight" hidden aria-label="Слайд 6 из 6">
+            <figure class="hero-art">
+                <img src="/assets/heroes/dk.png" alt="Рыцарь смерти в облике крови" loading="lazy">
+                <figcaption><b>Рыцарь смерти</b><span>Кровь</span></figcaption>
+            </figure>
+            <div class="slide__body">
+                <figure class="shot">
+                    <a href="/assets/shots/talents.jpg" target="_blank" rel="noopener">
+                        <img src="/assets/shots/talents.jpg" alt="Окно howToPlay: вкладка билда" loading="lazy">
+                    </a>
+                </figure>
+                <h3 class="slide__title">Бислист и софты сеткой</h3>
+                <p class="slide__text">
+                    Что брать в слот, что уже лежит в сумке, с кого падает и кто
+                    ещё на это претендует в рейде. Видно до того, как нажал
+                    «Нужно».
+                </p>
+            </div>
+        </article>
+    </div>
+
+</section>
+
+<section class="strip" aria-label="Кому это">
+    <p><b>Новичку</b> — чтобы не читать три форума перед первым рейдом.</p>
+    <p><b>Вернувшемуся</b> — вспомнить свой класс за вечер, а не за месяц.</p>
+    <p><b>Ветерану</b> — не держать в голове двадцать четыре босса.</p>
+</section>
+
+<section class="features" id="features">
+    <h2 class="h-section"><span class="h-section__num">Что умеет</span> Девять ответов на «а что мне делать»</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Ротация</h4>
+            <p>
+                Что открывать бой и в каком порядке жать дальше. Опенер —
+                цепочкой иконок, остальное — приоритетом, а не простынёй текста.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Таланты</h4>
+            <p>
+                Дерево показывается живьём, рядом — готовые ветки и свои сборки.
+                «Скопировать с цели» забирает раскладку у того, кто уже разобрался.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Капы</h4>
+            <p>
+                Сколько нужно попадания и прочего, сколько есть и сколько теряешь,
+                пока не добрал. Считает по твоим надетым вещам, а не по табличке.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Макро</h4>
+            <p>
+                Готовые карточки с полем, из которого текст копируется одной
+                кнопкой. Метки в ротации показывают, где какое пригодится.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Тактики</h4>
+            <p>
+                Двадцать четыре босса ЦЛК, Рубинового святилища и Испытания
+                крестоносца. Разный текст танку, хилу и дд, разложенный по фазам,
+                с картой расстановки и отдельной строкой на героике.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Экипировка</h4>
+            <p>
+                Бислист сеткой иконок: что брать в слот, что уже лежит в сумке,
+                с кого падает. Плюс мелочь, которую вечно забывают — кольца,
+                тринкеты, зачарования.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Софты</h4>
+            <p>
+                На что стоит ролить по всему рейду и кто ещё на это претендует —
+                видно до того, как нажал «Нужно», а не после.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Панель в бою</h4>
+            <p>
+                Полоска у края экрана: что держать на себе, когда сработал прок,
+                что вышло из отката, не спали ли твои доты. Клик по иконке — каст.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Мои КД</h4>
+            <p>
+                Куда на этой неделе уже сходил и куда ещё можно — без хождения по
+                вкладкам и календарю.
+            </p>
+        </li>
+    </ol>
+
+    <figure class="shot shot--inset">
+        <a href="/assets/shots/talents.jpg" target="_blank" rel="noopener">
+            <img src="/assets/shots/talents.jpg" width="1500" height="622" loading="lazy"
+                 alt="Вкладка «Билд → Таланты»: дерево талантов слева, список своих сборок справа">
+        </a>
+        <figcaption>Таланты живьём, свои сборки рядом. Дерево открывается боковой панелью, не закрывая окно.</figcaption>
+    </figure>
+
+    <p class="features__tail">
+        И одна мелочь, которая на деле не мелочь: <b>переключи класс и спек в
+        шапке</b> — и окно покажет их. Удобно объяснять согильдийцу, что ему
+        ролить и что жать, не заходя за него.
+    </p>
+</section>
+
+<section class="talk" id="talk">
+    <h2 class="h-section"><span class="h-section__num">Обратная связь</span> Что дальше — решаете вы</h2>
+    <p class="talk__lede">
+        Аддоны пишутся под живую игру, а не под воображаемую. Что мешает, чего не
+        хватает, где текст врёт — пишите, это и есть план работ.
+    </p>
+    <div class="talk__links">
+        <a class="btn btn--primary" href="#" data-link="discord">Discord</a>
+        <a class="btn" href="#" data-link="repo">Исходники</a>
+        <a class="btn" href="#" data-link="issues">Сообщить об ошибке</a>
+    </div>
+
+    <p class="talk__support">
+        Аддоны бесплатные и такими останутся. Если пригодились и хочется
+        поблагодарить — <a href="#" data-link="donate">можно закинуть на кофе</a>.
+        На очередь правок это не влияет: чинится то, что мешает большему числу
+        людей.
+    </p>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">howToPlay</p>
+    <p>Аддоны для World of Warcraft 3.3.5a. Не связаны с Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/">Все аддоны</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

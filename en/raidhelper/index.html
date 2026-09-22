@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Helper — raid review from the combat log for WoW 3.3.5a</title>
+<meta name="description" content="Raid Helper is a World of Warcraft 3.3.5a addon that reviews your raid from the combat log inside the game: deaths with causes, mechanic mistakes, a timeline of every player, threat, a 3D replay of the rooms, a raid summary with consumables, GP and raid gathering.">
+<link rel="canonical" href="https://wow-addons.manacode.su/en/raidhelper/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/raidhelper/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/raidhelper/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/raidhelper/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raid Helper — raid review for WoW 3.3.5a">
+<meta property="og:description" content="What happened in that wipe, and who started it: deaths, mistakes, timeline and a 3D replay, right in the game.">
+<meta property="og:url" content="https://wow-addons.manacode.su/en/raidhelper/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/raidhelper/en/summary.jpg">
+<link rel="icon" type="image/png" href="/assets/raidhelper/icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--raidhelper">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon mark__icon--smooth" src="/assets/raidhelper/icon.png" width="32" height="32" alt="">
+        <span class="mark__word">Raid Helper</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#shots">Screenshots</a>
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper">GitHub</a>
+        <a class="lang" href="/raidhelper/" hreflang="ru" lang="ru">RU</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            WoW 3.3.5a addon &middot; version 1.7
+        </p>
+        <h1>What happened in that wipe, and who started it.</h1>
+        <p class="lede">
+            A meter tells you how much. Raid Helper tells you what happened and
+            when: who took the mechanic, who stopped getting healed, whose death
+            pulled the raid down after it. The review opens right after the
+            fight, without leaving the game.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/releases/latest">Download</a>
+            <a class="btn" href="#install">How to install</a>
+        </div>
+        <ul class="clients" aria-label="Supported clients">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">English and Russian</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="attempt summary">
+        <a href="/assets/raidhelper/en/summary.jpg" target="_blank" rel="noopener">
+            <img src="/assets/raidhelper/en/summary.jpg" width="1600" height="989" alt="Lich King attempt summary: mistakes with GP, mechanics tables, player cards and a death tooltip">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Commands">
+    <h2 class="cmds__head">Commands</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/mrh</code></dt>
+            <dd>Open or close the window. The buttons on the small panel do the same.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh raid</code></dt>
+            <dd>Straight to a tab. Also <code>log</code> — review, <code>spam</code> — recruit spam, <code>gp</code> — mistakes and GP.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh status</code></dt>
+            <dd>Is it recording and how much storage is used. Turn it on and off — <code>/mrh on</code>, <code>/mrh off</code>, <code>/mrh pause</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/mrh help</code></dt>
+            <dd>All commands to chat.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf shelf--dark" id="shots" aria-label="Screenshots">
+    <div class="shelf__in">
+        <h2 class="h-section">The whole night, attempt by attempt</h2>
+        <p class="lede">
+            Recording starts by itself in a raid instance. When the fight ends,
+            the review is ready: click the attempt on the left.
+        </p>
+
+        <div class="frames frames--wide">
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/replay-lanathel.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/replay-lanathel.jpg" alt="3D replay of Blood-Queen Lana'thel: players on the floor, the event feed on the left" loading="lazy">
+                </a>
+                <figcaption>3D replay</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/lichking.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/lichking.jpg" alt="Lich King kill: Defile, damage to Val'kyr and spheres, player cards by role" loading="lazy">
+                </a>
+                <figcaption>Attempt summary</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/timeline.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/timeline.jpg" alt="Player timeline on the Lich King: auras, healing, damage taken and the health curve, with a hit tooltip" loading="lazy">
+                </a>
+                <figcaption>Timeline</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/raid-summary.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/raid-summary.jpg" alt="Icecrown Citadel raid summary: time, wipes, damage, consumables and awards" loading="lazy">
+                </a>
+                <figcaption>Raid summary</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/replay-putricide.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/replay-putricide.jpg" alt="3D replay of Professor Putricide: oozes, a focused player, the timeline of events" loading="lazy">
+                </a>
+                <figcaption>Putricide</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/raid.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/raid.jpg" alt="Raid tab: groups, reserve, buff check by buffs, debuffs and cooldowns" loading="lazy">
+                </a>
+                <figcaption>Raid by groups</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/spammer.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/spammer.jpg" alt="Recruit spammer: message template, channels and specs to gather by role" loading="lazy">
+                </a>
+                <figcaption>Spammer</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/raidhelper/en/lockouts.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/raidhelper/en/lockouts.jpg" alt="Lockouts: saves of your characters and the guild, who is free for the raid" loading="lazy">
+                </a>
+                <figcaption>Lockouts</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="h-section"><span class="h-section__num">Features</span> A review you don't have to upload</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Attempt summary</h4>
+            <p>
+                Result, raid DPS and HPS, deaths and boss mechanics as compact
+                tables: damage to adds and Val'kyr, stacks, puddles, interrupts.
+                Rules for Icecrown Citadel, the Ruby Sanctum and Trial of the
+                Crusader.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Deaths with causes</h4>
+            <p>
+                The last hits before each death, which defensives were ready and
+                where the player stood. On a wipe — who it started with.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Timeline and threat</h4>
+            <p>
+                Casts, auras, incoming damage and the health curve of every
+                player on one strip. Threat is recorded like Omen does it: who
+                held each enemy, aggro pulls and taunts.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>3D replay</h4>
+            <p>
+                The fight played back on the room floor: players, boss, adds,
+                puddles and cones. Rooms of Icecrown Citadel, the Ruby Sanctum and
+                Trial of the Crusader come from the client's own geometry. Speed
+                from x0.5 to x8.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Raid summary</h4>
+            <p>
+                The whole night in one window: bosses, wipes, time in combat and
+                idle, consumables per player and their cost in gold, raid awards
+                from Lightning rod to Puddle lover.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Fault Ledger</h4>
+            <p>
+                Mechanic mistakes turn into GP, EP, DKP or a roll penalty — with
+                proof in chat. EPGP and Quick DKP V2, your own rules and a journal
+                with undo.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Raid gathering</h4>
+            <p>
+                Recruit spam to channels, raid templates, auto-invite on "+", the
+                raid by groups and its expected DPS. On a ready check you see who
+                lacks buffs, flask or food.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Always at hand</h4>
+            <p>
+                Mini window: DPS during combat, mistakes after it. A panel with
+                DPS and HPS graphs and the raid's consumables. Lockouts of your
+                characters and the guild on their own tab.
+            </p>
+        </li>
+    </ol>
+
+    <ul class="facts">
+        <li>Raid result to Discord in one click</li>
+        <li>A chat link opens the attempt for a raid mate</li>
+        <li>Consumable prices — your own scan or Auctionator</li>
+        <li>Three themes and window scale</li>
+        <li>English and Russian</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Install">
+    <h2 class="h-section"><span class="h-section__num">Install</span> How to install</h2>
+    <p class="lede">
+        Two ways: the updater installs and updates for you, the archive is by hand.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>ManacodeUpdate</h3>
+            <ol class="steps">
+                <li>Download and run the updater.</li>
+                <li>Press Install next to Raid Helper.</li>
+                <li>For 3D rooms — 3D replay rooms → Apply.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Update/releases/latest">Download the updater</a>
+        </article>
+        <article class="setup__card">
+            <h3>By hand</h3>
+            <ol class="steps">
+                <li>Download an archive: full — with 3D rooms, lite — without them.</li>
+                <li>Unpack it here: <code class="path">game folder\Interface\AddOns</code></li>
+                <li>Fully restart the game and type <code>/mrh</code>.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/releases/latest">Releases on GitHub</a>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">The Lich King</p>
+        <p>
+            The 3.3.5 client loses positions on the Lich King platform after
+            Quake. A client patch with instructions comes in the release archive,
+            and in the updater it is one button — "Fix Lich King positions". Only
+            the player who records the fight needs it.
+        </p>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Feedback</p>
+        <p>
+            Bugs, oddities and ideas — in
+            <a href="https://discord.gg/CYnxS6R9qY">Discord</a> or in
+            <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper/issues">GitHub issues</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Raid Helper</p>
+    <p>Made by manacode. Not affiliated with Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/en/">Other manacode addons</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidHelper">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

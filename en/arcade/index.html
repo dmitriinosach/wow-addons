@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Waiting Arcade — twenty games inside WoW while the raid gathers</title>
+<meta name="description" content="Raid Waiting Arcade — a World of Warcraft addon: twenty mini-games in a client window. Works on 3.3.5a and on Retail Midnight. Hides during combat, pauses on ready check, doesn't take over chat. Chess, Checkers, Pairs, and Chests support two players. Beta.">
+<link rel="canonical" href="https://wow-addons.manacode.su/en/arcade/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/arcade/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/arcade/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/arcade/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raid Waiting Arcade — games inside WoW">
+<meta property="og:description" content="Twenty mini-games in a client window while the raid gathers. 3.3.5a and Retail Midnight. Beta.">
+<meta property="og:url" content="https://wow-addons.manacode.su/en/arcade/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/arcade/en/menu.jpg">
+<link rel="icon" type="image/png" href="/assets/tex/arcade_icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--arcade">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon" src="/assets/tex/arcade_icon.png" width="32" height="32" alt="">
+        <span class="mark__word">Raid Waiting Arcade</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#games">Games</a>
+        <a href="#duo">Duo</a>
+        <a href="#rules">About raids</a>
+        <a href="#install">Install</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade">GitHub</a>
+        <a class="lang" href="/arcade/" hreflang="ru" lang="ru">RU</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            WoW addon &middot; beta
+        </p>
+        <h1>Five to twenty minutes between "I'm in" and "pulling".</h1>
+        <p class="lede">
+            You can't leave the client — you'll miss the invite and the voice
+            call to gather. Alt-tabbing to a browser loses you both. The
+            arcade fills that time inside the game: twenty games that run a
+            few minutes each, and you can drop any of them mid-move.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/releases">Download the beta</a>
+            <a class="btn" href="#install">How to install</a>
+        </div>
+        <ul class="clients" aria-label="Supported clients">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">Retail &middot; Midnight</li>
+            <li>more clients soon</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="arcade menu">
+        <a href="/assets/arcade/en/menu.jpg" target="_blank" rel="noopener">
+            <img src="/assets/arcade/en/menu.jpg" width="1280" height="1059" alt="The arcade window: twenty game tiles">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Commands">
+    <h2 class="cmds__head">Commands</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/arc</code></dt>
+            <dd>Opens or closes the window. Same as <code>/arcade</code> and the minimap button.</dd>
+        </div>
+        <div>
+            <dt><code>/arc chess</code></dt>
+            <dd>
+                Jumps straight into a game, past the menu. Swap in your own:
+                <span class="cmds__ids">apothecary arkanoid breaker checkers chess gems gofish invaders jump merge mines pairs recipe slide snake solitaire stack sudoku tetris tower</span>
+            </dd>
+        </div>
+        <div>
+            <dt><code>/arc about</code></dt>
+            <dd>A window with links: releases, Discord. The client can't open links, so the address is shown pre-selected for Ctrl+C.</dd>
+        </div>
+        <div>
+            <dt><code>/arc broken</code></dt>
+            <dd>Which games got disabled by an error, and why. Useful when reporting a bug.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf" id="games" aria-label="Games">
+    <div class="shelf__in">
+        <h2 class="h-section">Twenty games, none of them an evening-eater</h2>
+        <p class="lede">
+            Puzzles, cards, real-time action, and games against an opponent.
+            A game saves on Esc and survives <code>/reload</code>: dropping
+            it costs you nothing.
+        </p>
+
+        <div class="frames">
+            <figure class="frame">
+                <a href="/assets/arcade/en/pairs.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/pairs.jpg" alt="Pairs setup screen: four modes, field size, pairs or triples" loading="lazy">
+                </a>
+                <figcaption>Pairs</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/solitaire.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/solitaire.jpg" alt="A Klondike deal at the start of a game" loading="lazy">
+                </a>
+                <figcaption>Solitaire</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/chests.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/chests.jpg" alt="A murloc opponent at the card table" loading="lazy">
+                </a>
+                <figcaption>Chests</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/invaders.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/invaders.jpg" alt="A ring of enemies above the player's ship" loading="lazy">
+                </a>
+                <figcaption>Invaders</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/sudoku.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/sudoku.jpg" alt="A sudoku grid with the number pad" loading="lazy">
+                </a>
+                <figcaption>Sudoku</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/mines.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/mines.jpg" alt="A minefield with opened cells and flags" loading="lazy">
+                </a>
+                <figcaption>Mines</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/apothecary.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/apothecary.jpg" alt="Flasks of coloured herbs to sort" loading="lazy">
+                </a>
+                <figcaption>Apothecary</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/arcade/en/chess.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/arcade/en/chess.jpg" alt="A chess board at the starting position" loading="lazy">
+                </a>
+                <figcaption>Chess</figcaption>
+            </figure>
+        </div>
+
+        <h3 class="games__head">All twenty</h3>
+        <ul class="gtiles">
+            <li class="gtile"><b>Apothecary</b><span>Sort herbs into vials so each color ends up alone in its own.</span></li>
+            <li class="gtile"><b>Arkanoid</b><span>Levels run one after another as long as you have balls. Behind the gold walls are chambers with capsules.</span></li>
+            <li class="gtile"><b>Bubbles</b><span>Clear connected groups of stones. The bigger the group, the more points.</span></li>
+            <li class="gtile gtile--duo"><b>Checkers</b><i>2 players</i><span>Russian checkers (mandatory captures) against the bot or a friend.</span></li>
+            <li class="gtile gtile--duo"><b>Chess</b><i>2 players</i><span>Standard chess against another person — there's no bot for this one.</span></li>
+            <li class="gtile gtile--duo"><b>Chests</b><i>2 players</i><span>A memory card game: against the character at the table or against a friend.</span></li>
+            <li class="gtile"><b>Construction</b><span>A crane swings a floor on a cable. A precise landing fills the whole floor with tenants.</span></li>
+            <li class="gtile"><b>Invaders</b><span>Waves of enemies from above: formation, swarms, ring, rain, siege. Auto-fire, spacebar for your ability.</span></li>
+            <li class="gtile"><b>Jumper</b><span>The character jumps on its own, arrow keys steer it sideways. Climb as high as you can.</span></li>
+            <li class="gtile"><b>Match Three</b><span>Swap adjacent gems and match lines of three or more.</span></li>
+            <li class="gtile"><b>Merge</b><span>Slide the board with arrow keys: two matching potions merge into the next recipe.</span></li>
+            <li class="gtile"><b>Mines</b><span>Clear the minefield: the number on a tile tells you how many mines are nearby.</span></li>
+            <li class="gtile gtile--duo"><b>Pairs</b><i>2 players</i><span>A memory game: flip two cards at a time and find the matches.</span></li>
+            <li class="gtile"><b>Recipe</b><span>Guess the secret recipe in a few pinches: brew the mix and read the result.</span></li>
+            <li class="gtile"><b>Slide</b><span>A picture cut up and shuffled. Tiles slide into the empty spot.</span></li>
+            <li class="gtile"><b>Snake</b><span>Eat food without hitting a wall or biting your own tail.</span></li>
+            <li class="gtile"><b>Solitaire</b><span>Klondike, FreeCell, and Yukon: clear the layout by suit.</span></li>
+            <li class="gtile"><b>Storekeeper</b><span>Push crates under the crane, fill in pits, and clear a full row.</span></li>
+            <li class="gtile"><b>Sudoku</b><span>Digits 1–9, no repeats in any row, column, or box.</span></li>
+            <li class="gtile"><b>Tetris</b><span>A 10-by-20 board: pieces fall, and full lines clear.</span></li>
+        </ul>
+    </div>
+</section>
+
+<section class="hub__more" id="duo" aria-label="Duo">
+    <h2 class="h-section"><span class="h-section__num">Duo</span> Play a match with a friend</h2>
+
+    <figure class="scene">
+        <img src="/assets/arcade/duo.en.svg" width="1120" height="500" alt="Two players sitting on a bench in Dalaran, each with the arcade window open showing the same chess game" loading="lazy">
+    </figure>
+
+    <ol class="flow">
+        <li><b>Both players open the arcade</b>It's needed on both ends.</li>
+        <li><b>Send a game invite</b>One invites, the other clicks "Yes".</li>
+        <li><b>Play the match</b>Ran out of time? Finish it later.</li>
+    </ol>
+
+    <p class="duo__req">Chess, Checkers, Pairs, and Chests. You need to be in the same zone, layer, or instance.</p>
+</section>
+
+<section class="features" id="rules">
+    <h2 class="h-section"><span class="h-section__num">About raids</span> What it won't do to your evening</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Enter combat, the game pauses</h4>
+            <p>
+                The game pauses and the window leaves the screen on its
+                own — that's the "Hide in combat" checkbox at work. Bringing
+                it back is on you, not the addon: there's no auto-return, so
+                the game can't pop up mid-pull.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>You won't miss a ready check</h4>
+            <p>
+                A ready check or a group invite pauses the game, but the
+                window stays up: you can see the raid is forming, and
+                forming without you, until you click.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Chat stays yours</h4>
+            <p>
+                The window doesn't take over your keyboard: Enter opens
+                chat, Esc closes the arcade. Games only get the arrow keys
+                and spacebar, and only while a game is running; keys can be
+                reassigned, and most games play with the mouse alone.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>A closed window does nothing</h4>
+            <p>
+                A hidden arcade drops its game loop instead of spinning it
+                idle. An addon that eats frames while nobody's playing it
+                isn't an arcade — it's a tax.
+            </p>
+        </li>
+    </ol>
+</section>
+
+<section class="hub__more" id="look" aria-label="Look">
+    <h2 class="h-section"><span class="h-section__num">Look</span> Looks like part of the client</h2>
+    <p class="lede">
+        Games are dressed in gear straight from WoW: icons come from the
+        client by item ID instead of being redrawn. The window comes in one
+        of six themes: Parchment, Dark Gold, Scroll, Stone, Slate, Flat.
+    </p>
+
+    <div class="pair">
+        <figure class="shot">
+            <a href="/assets/arcade/en/menu.jpg" target="_blank" rel="noopener">
+                <img src="/assets/arcade/en/menu.jpg" alt="The arcade menu in the Dark Gold theme" loading="lazy">
+            </a>
+            <figcaption>"Parchment": warm wood and gold.</figcaption>
+        </figure>
+        <figure class="shot">
+            <a href="/assets/arcade/en/menu-slate.jpg" target="_blank" rel="noopener">
+                <img src="/assets/arcade/en/menu-slate.jpg" alt="The arcade menu in the Slate theme" loading="lazy">
+            </a>
+            <figcaption>"Slate": cold stone and steel.</figcaption>
+        </figure>
+    </div>
+
+    <ul class="facts">
+        <li>Russian and English</li>
+        <li>Window scale and a transparent window</li>
+        <li>Sound, effects, and music as separate toggles</li>
+        <li>Games have their own themes: which items the board is drawn with</li>
+        <li>A button by the minimap or on screen</li>
+        <li>High scores for every game and mode</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Install">
+    <h2 class="h-section"><span class="h-section__num">Install</span> How to install</h2>
+    <p class="lede">
+        One archive covers both clients — <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/releases">from the releases page on GitHub</a>.
+        Inside is a single folder — that's the one you drop in.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>3.3.5a &middot; WotLK</h3>
+            <ol class="steps">
+                <li>Close the game.</li>
+                <li>Drop the folder here: <code class="path">client folder\Interface\AddOns</code></li>
+                <li>Launch the game and type <code>/arc</code>.</li>
+            </ol>
+        </article>
+        <article class="setup__card">
+            <h3>Retail &middot; Midnight</h3>
+            <ol class="steps">
+                <li>Close the game.</li>
+                <li>Drop the folder here: <code class="path">World of Warcraft\_retail_\Interface\AddOns</code></li>
+                <li>Launch the game and type <code>/arc</code>.</li>
+            </ol>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Beta</p>
+        <p>
+            All twenty games are in, but this is the first public build:
+            something's bound to turn up. Send a bug, an oddity, or an idea
+            to <a href="https://discord.gg/CYnxS6R9qY">Discord</a> or as
+            <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade/issues">an issue on GitHub</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Raid Waiting Arcade</p>
+    <p>Developed by manacode. Not affiliated with Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/en/">More addons by manacode</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-RaidWaitingArcade">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

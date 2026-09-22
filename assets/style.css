@@ -1,0 +1,1666 @@
+/* Спутник — лендинг серии аддонов.
+   Язык оформления взят у самой игры: цвета качества предметов и всплывающая
+   рамка предмета. Игрок читает их без объяснений, а ни на одной другой странице
+   такого набора не встретишь. */
+
+:root {
+    /* Цвета качества — ровно те, что в клиенте. Менять нельзя: узнаваемость
+       держится на точности. */
+    --epic: #a335ee;
+    --rare: #0070dd;
+    --uncommon: #1eff00;
+
+    --void: #07090e;
+    --panel: #10131b;
+    --panel-2: #161a24;
+    --edge: #2a3040;
+    --gold: #c8a464;
+    --frost: #7fd4e8;
+
+    --ink: #e8e3d8;
+    --ink-dim: #9aa0ad;
+
+    --display: "Forum", "Palatino Linotype", Georgia, serif;
+    --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+    --w: 1120px;
+    --r: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    position: relative;
+    margin: 0;
+    /* Хаб короче экрана, и без этого страница выходила на 29 точек длиннее
+       окна: подвал со своим нижним отступом вылезал полоской за край. */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(1200px 700px at 78% -10%, rgba(127, 212, 232, .10), transparent 62%),
+        radial-gradient(900px 600px at 8% 8%, rgba(163, 53, 238, .10), transparent 60%),
+        var(--void);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 400; letter-spacing: .01em; }
+
+a { color: var(--frost); }
+
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--panel);
+    padding: 12px 18px;
+    z-index: 10;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+:focus-visible {
+    outline: 2px solid var(--frost);
+    outline-offset: 3px;
+}
+
+/* --- шапка ---------------------------------------------------------------- */
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 22px 24px;
+}
+
+.mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.mark__glyph { color: var(--gold); font-size: 15px; }
+
+.mark__word {
+    font-family: var(--display);
+    font-size: 22px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.top__nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 26px; }
+
+.top__nav a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    font-size: 15px;
+}
+.top__nav a:hover { color: var(--ink); }
+
+/* --- герой ---------------------------------------------------------------- */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 56px;
+    align-items: center;
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 60px 24px 84px;
+}
+
+/* min-width у элемента сетки: без него длинный заголовок распирает колонку и
+   ломает вторую. */
+.hero__text { min-width: 0; }
+
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 22px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(40px, 6.4vw, 68px);
+    line-height: 1.04;
+}
+
+.lede {
+    max-width: 46ch;
+    margin: 24px 0 0;
+    color: var(--ink-dim);
+    font-size: 18px;
+}
+
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: var(--panel-2);
+    color: var(--ink);
+    font-size: 15px;
+    text-decoration: none;
+    transition: border-color .18s, background .18s, transform .18s;
+}
+.btn:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+.btn--primary {
+    border-color: rgba(200, 164, 100, .55);
+    background: linear-gradient(180deg, rgba(200, 164, 100, .20), rgba(200, 164, 100, .07));
+    color: #f4ecdc;
+}
+
+.btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/* --- рамка предмета: фирменный элемент ------------------------------------ */
+
+.tip {
+    margin: 0;
+    padding: 20px 22px 18px;
+    background: rgba(4, 6, 10, .88);
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+}
+
+.tip--hero { transform: rotate(-.6deg); }
+
+.tip__name {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 26px;
+}
+.tip__name--epic { color: var(--epic); }
+
+.tip__kind {
+    margin: 2px 0 14px;
+    font-size: 14px;
+    color: var(--ink-dim);
+}
+
+.tip__stats { margin: 0; padding: 0; list-style: none; }
+
+.tip__stats li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 15px;
+}
+.tip__stats li::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+}
+
+.tip__use {
+    margin: 14px 0 0;
+    color: var(--uncommon);
+    font-size: 15px;
+}
+
+.tip__flavor {
+    margin: 12px 0 0;
+    color: var(--gold);
+    font-size: 14px;
+    font-style: italic;
+    opacity: .85;
+}
+
+/* --- полоса «кому» -------------------------------------------------------- */
+
+.strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 0 24px;
+    background: transparent;
+}
+
+.strip p {
+    margin: 0;
+    padding: 22px 24px;
+    border-top: 1px solid var(--edge);
+    border-bottom: 1px solid var(--edge);
+    background: rgba(16, 19, 27, .6);
+    font-size: 15px;
+    color: var(--ink-dim);
+}
+
+.strip b { color: var(--ink); font-weight: 600; }
+
+/* --- карусель по классам -------------------------------------------------- */
+/* Цвета классов — те же, что в клиенте. Второй словарь игры после качества
+   предметов: игрок по одному цвету знает, о ком речь. */
+
+.tour {
+    /* Одна высота на портрет и на снимок рядом: они стоят в ряд, и разнобой
+       по высоте сразу бросается в глаза. */
+    --art-h: clamp(290px, 28vw, 400px);
+
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 84px 24px 96px;
+}
+
+.tour__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.tour__head .h-section { margin: 0; }
+
+/* Все слайды лежат в ОДНОЙ ячейке сетки друг на друге. Так высота сцены равна
+   самому высокому слайду и не скачет при перелистывании — а скакала бы, потому
+   что снимки разного размера и текст разной длины. */
+.tour__stage {
+    display: grid;
+    align-items: start;
+}
+
+/* Портрет и снимок стоят в ряд, описание идёт под ними во всю ширину: строка в
+   58 знаков читается легче, чем колонка в 30. */
+.slide {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+        "art   shot"
+        "title title"
+        "text  text";
+    gap: 26px 30px;
+    align-items: start;
+    animation: rise .3s ease-out;
+}
+
+/* Скрытый слайд ПРОДОЛЖАЕТ занимать место — иначе смысл стопки теряется.
+   Именно visibility, а не display: она же убирает слайд из чтения экранным
+   диктором, чего одного атрибута hidden тут не хватило бы: display: grid выше
+   перебивает браузерное [hidden] { display: none }. */
+.slide[hidden] {
+    display: grid;
+    visibility: hidden;
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* Портрет: карточка с вырезанным по контуру персонажем на своём фоне, подпись
+   ложится поверх низа. Кадрируем по грудь — лицо и плечи узнаются, а мелкие
+   огрехи вырезки по подолу в кадр не попадают. */
+/* Высота ЗАДАНА, а не выведена из соотношения сторон. Соотношение тут работало
+   наоборот: колонку растягивал по высоте текст соседа, и ширина карточки
+   считалась уже из этой высоты — портрет вылезал на текст и менял размер от
+   слайда к слайду. */
+.hero-art {
+    grid-area: art;
+    position: relative;
+    width: 100%;
+    height: var(--art-h);
+    margin: 0;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background:
+        radial-gradient(74% 54% at 50% 30%, var(--cls-glow), transparent 72%),
+        linear-gradient(180deg, var(--panel-2), var(--void));
+    overflow: hidden;
+}
+
+/* Портрет вписан с полями, а не обрезан по рамке: фон карточки со свечением
+   класса должен читаться вокруг него, иначе это просто прямоугольная картинка.
+   Нижнее поле больше остальных — там лежит подпись. */
+.hero-art img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 7% 10% 17%;
+    object-fit: contain;
+    object-position: 50% 0;
+    filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .5));
+    transform: scale(2);
+    margin: 32% 0 0;
+}
+
+/* Портрета ещё нет — ниша не должна выглядеть сломанной. */
+.hero-art.is-empty img { display: none; }
+.hero-art.is-empty::before {
+    content: "портрет будет";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--ink-dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: .5;
+}
+
+.hero-art figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 42px 18px 16px;
+    background: linear-gradient(transparent, rgba(4, 6, 10, .92) 62%);
+}
+
+.hero-art figcaption b {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--cls);
+}
+
+.hero-art figcaption span {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+/* Обёртка растворяется, и её содержимое встаёт прямо в сетку слайда: снимок в
+   правую колонку первого ряда, заголовок и текст — во всю ширину под ними. */
+.slide__body { display: contents; }
+
+.slide .shot { grid-area: shot; min-width: 0; }
+
+/* Рамка снимка ровно по высоте портрета — они стоят в ряд. */
+.slide .shot a { height: var(--art-h); }
+
+/* Снимки у слайдов разного размера — 1500x1002, 1500x622, 1160x760. Вписываем
+   целиком: обрезать нельзя, там интерфейс. */
+.slide .shot img {
+    height: 100%;
+    object-fit: contain;
+    background: #05070b;
+}
+
+.slide__title {
+    grid-area: title;
+    margin: 0;
+    font-size: 26px;
+}
+
+.slide__text {
+    grid-area: text;
+    max-width: 84ch;
+    margin: -14px 0 0;
+    color: var(--ink-dim);
+}
+
+.tour__nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.tour__arrow {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: var(--panel-2);
+    color: var(--ink);
+    font-size: 17px;
+    cursor: pointer;
+    transition: border-color .18s, color .18s;
+}
+.tour__arrow:hover { border-color: var(--gold); }
+
+.tour__dots { display: flex; gap: 8px; }
+
+.tour__dot {
+    width: 30px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: var(--edge);
+    cursor: pointer;
+    transition: background .2s;
+}
+.tour__dot.is-on { background: var(--gold); }
+
+/* Цвета классов клиента 3.3.5. --cls-glow — тот же цвет, приглушённый до фона. */
+.slide[data-class="priest"]      { --cls: #ffffff; --cls-glow: rgba(255, 255, 255, .13); }
+.slide[data-class="warrior"]     { --cls: #c79c6e; --cls-glow: rgba(199, 156, 110, .16); }
+.slide[data-class="mage"]        { --cls: #69ccf0; --cls-glow: rgba(105, 204, 240, .16); }
+.slide[data-class="paladin"]     { --cls: #f58cba; --cls-glow: rgba(245, 140, 186, .16); }
+.slide[data-class="deathknight"] { --cls: #c41f3b; --cls-glow: rgba(196, 31, 59, .18); }
+
+/* --- снимки экрана -------------------------------------------------------- */
+/* Рамка тёмная и тонкая: сам снимок и так золотисто-коричневый, ещё одна
+   золотая рамка вокруг превратила бы его в кашу. */
+
+.look {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 72px 24px 0;
+}
+
+.shot { margin: 0; }
+
+/* Паспарту вокруг снимка: кадр обрезан по окну аддона, и без поля он выглядит
+   вырванным. Поле тёмное — снимок и так тёплый, вторая золотая рамка сделала бы
+   кашу. */
+.shot a {
+    display: block;
+    max-width: 100%;
+    padding: 16px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background:
+        radial-gradient(120% 100% at 50% 0%, rgba(127, 212, 232, .06), transparent 70%),
+        var(--void);
+    line-height: 0;
+    overflow: hidden;
+    transition: border-color .18s;
+}
+.shot a:hover { border-color: var(--gold); }
+
+/* max-width страхует от снимка шире контейнера: атрибут width в разметке
+   задаёт натуральный размер, и без этого правила он бы им и рисовался. */
+.shot img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 1px;
+}
+
+.shot figcaption {
+    max-width: 68ch;
+    margin: 12px 0 0;
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.shot--inset { margin-top: 28px; }
+
+/* Подсказка об игроке маленькая: растянутая во всю ширину она превращается в
+   мыло. Держим её в натуральном размере. */
+.shot--narrow a { max-width: 672px; }
+
+/* --- заголовки разделов --------------------------------------------------- */
+
+.h-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 16px;
+    margin: 0 0 28px;
+    font-size: clamp(26px, 3.4vw, 36px);
+}
+
+.h-section__num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+/* --- что умеет основной аддон --------------------------------------------- */
+
+.features {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 96px 24px 0;
+}
+
+.feats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 34px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.feat h4 {
+    margin: 0 0 6px;
+    font-size: 21px;
+    color: var(--ink);
+}
+
+.feat p { margin: 0; font-size: 15px; color: var(--ink-dim); }
+
+/* Список идёт во всю ширину раздела, а не внутри карточки — поэтому строкам
+   нужен потолок по длине, иначе на широком экране они разъезжаются. */
+.feats--wide .feat p { max-width: 42ch; }
+
+.features__tail {
+    max-width: 62ch;
+    margin: 34px 0 0;
+    padding-top: 26px;
+    border-top: 1px solid var(--edge);
+    color: var(--ink-dim);
+    font-size: 16px;
+}
+
+.features__tail b { color: var(--ink); font-weight: 600; }
+
+/* --- дополнения ----------------------------------------------------------- */
+
+.dlc {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 96px 24px 0;
+}
+
+.dlc__lede { max-width: 64ch; margin: 0 0 30px; color: var(--ink-dim); }
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 28px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: rgba(16, 19, 27, .72);
+}
+
+/* Цветом качества помечена только полоса сверху: карточка дополнения не должна
+   спорить с основным аддоном, у которого цвет несёт заголовок. */
+.card--rare { border-top: 2px solid var(--rare); }
+.card--uncommon { border-top: 2px solid var(--uncommon); }
+
+.badge {
+    margin: 0 0 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.card__title { margin: 0; font-size: 27px; }
+.card--rare .card__title { color: var(--rare); }
+.card--uncommon .card__title { color: var(--uncommon); }
+
+.card__sub { margin: 6px 0 18px; color: var(--ink-dim); font-size: 15px; }
+
+.card__list { margin: 0 0 22px; padding: 0; list-style: none; display: grid; gap: 8px; }
+
+.card__list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    color: var(--ink-dim);
+}
+.card__list li::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+}
+
+.card__foot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: auto;
+}
+
+.card__state {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+/* --- комплект ------------------------------------------------------------- */
+
+.set {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 96px 24px 0;
+}
+
+.set__lede { max-width: 60ch; margin: 0 0 30px; color: var(--ink-dim); }
+
+.set__grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 34px;
+    align-items: start;
+}
+
+.slots {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.slot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: var(--panel);
+    cursor: pointer;
+    transition: border-color .18s, background .18s;
+}
+
+.slot input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.slot__box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--edge);
+    border-radius: 2px;
+    background: var(--void);
+    flex: none;
+    transition: background .18s, border-color .18s, box-shadow .18s;
+}
+
+.slot__name { font-family: var(--display); font-size: 19px; }
+
+.slot:hover { border-color: var(--gold); }
+
+.slot input:focus-visible ~ .slot__box { outline: 2px solid var(--frost); outline-offset: 2px; }
+
+.slot--epic:has(input:checked) { border-color: var(--epic); background: rgba(163, 53, 238, .10); }
+.slot--rare:has(input:checked) { border-color: var(--rare); background: rgba(0, 112, 221, .12); }
+.slot--uncommon:has(input:checked) { border-color: var(--uncommon); background: rgba(30, 255, 0, .08); }
+
+.slot--epic:has(input:checked) .slot__box { background: var(--epic); border-color: var(--epic); }
+.slot--rare:has(input:checked) .slot__box { background: var(--rare); border-color: var(--rare); }
+.slot--uncommon:has(input:checked) .slot__box { background: var(--uncommon); border-color: var(--uncommon); }
+
+.slot--epic:has(input:checked) .slot__name { color: var(--epic); }
+.slot--rare:has(input:checked) .slot__name { color: var(--rare); }
+.slot--uncommon:has(input:checked) .slot__name { color: var(--uncommon); }
+
+.bonus {
+    padding: 26px 30px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: rgba(4, 6, 10, .8);
+}
+
+.bonus__count {
+    margin: 0 0 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.bonus__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+
+.bonus__line {
+    color: #5b6270;
+    font-size: 16px;
+    transition: color .25s;
+}
+
+.bonus__line b { font-family: var(--mono); font-size: 14px; }
+
+.bonus__line.is-on { color: var(--uncommon); }
+
+/* Не бонус, а честная оговорка: этой парой ничего не включается. Зажигается
+   так же, но серым — зелёный тут соврал бы. Правило идёт ПОСЛЕ .is-on:
+   вес тот же, побеждает порядок. */
+.bonus__line--flat.is-on { color: var(--ink-dim); }
+
+/* --- обратная связь ------------------------------------------------------- */
+
+.talk {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 96px 24px 0;
+}
+
+.talk__lede { max-width: 62ch; margin: 0 0 26px; color: var(--ink-dim); }
+
+.talk__links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Поддержать — строкой, а не кнопкой: главное действие на странице одно, и это
+   «Скачать». Кнопка рядом с ним читалась бы как плата за аддон. */
+.talk__support {
+    max-width: 62ch;
+    margin: 26px 0 0;
+    color: var(--ink-dim);
+    font-size: 15px;
+}
+
+/* Ссылки нет — остаётся обычный текст, без вида нажимаемого. */
+.talk__support a[aria-disabled="true"] {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* --- подвал --------------------------------------------------------------- */
+
+.foot {
+    max-width: var(--w);
+    margin: auto auto 0;
+    padding: 30px 24px 60px;
+    border-top: 1px solid var(--edge);
+    color: var(--ink-dim);
+    font-size: 14px;
+}
+
+.foot__mark {
+    margin: 0 0 6px;
+    font-family: var(--display);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+
+.foot p { margin: 0; }
+
+/* --- узкие экраны --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding-bottom: 60px; }
+    .tip--hero { transform: none; }
+    .strip { grid-template-columns: 1fr; }
+    .strip p { border-bottom: 0; }
+    .strip p:last-child { border-bottom: 1px solid var(--edge); }
+    .slide {
+        grid-template-columns: 1fr;
+        grid-template-areas: "art" "shot" "title" "text";
+    }
+    .hero-art { max-width: 320px; height: 400px;}
+    .slide .shot a { height: auto; }
+    .slide .shot img { height: auto; aspect-ratio: 16 / 10; }
+    .feats { grid-template-columns: 1fr; gap: 24px; }
+    .feats--wide .feat p { max-width: none; }
+    .cards { grid-template-columns: 1fr; }
+    .card { padding: 22px 24px; }
+    .set__grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+}
+
+/* --- Хаб ---------------------------------------------------------------- */
+
+.hub__head {
+    max-width: var(--w);
+    margin: 40px auto 0;
+    padding: 0 24px;
+}
+.hub__head h1 {
+    margin: 0;
+    max-width: 18ch;
+    font-family: var(--display);
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.04;
+}
+
+/* Два тайла в ряд, на узком экране — в столбик. Минимум 320 держит тултип
+   читаемым: ниже него строки характеристик начинают переноситься по одной. */
+.hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 22px;
+    max-width: var(--w);
+    margin: 54px auto 0;
+    padding: 0 24px;
+    align-items: stretch;
+}
+.hub .tip {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 28px 24px;
+}
+.tip__name--rare { color: var(--rare); }
+.tip__name--uncommon { color: var(--uncommon); }
+
+/* Кнопка прижата к низу, чтобы у тайлов разной длины она стояла на одной
+   линии — иначе два тултипа рядом выглядят как один съехавший. */
+.hub__act {
+    margin: 22px 0 0;
+    padding-top: 22px;
+    margin-top: auto;
+}
+
+.hub__more {
+    max-width: var(--w);
+    margin: 96px auto 0;
+    padding: 0 24px;
+}
+
+.foot__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-top: 18px;
+}
+.foot__nav a { color: var(--ink-dim); }
+.foot__nav a:hover { color: var(--gold); }
+
+/* Список игр: имена короткие, поэтому колонки считает браузер по ширине, а не
+   мы числом — на телефоне выходит две, на широком экране четыре. */
+.games {
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    columns: 4 180px;
+    column-gap: 26px;
+}
+.games li {
+    padding: 7px 0 7px 16px;
+    position: relative;
+    color: var(--ink-dim);
+    break-inside: avoid;
+}
+.games li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    font-size: 9px;
+    color: var(--gold);
+    top: 12px;
+}
+
+/* Отступ до подвала живёт здесь, а не в margin подвала: тогда на короткой
+   странице main растягивается, подвал прижимается к низу и не вылезает
+   полоской, а на длинной всё выглядит как раньше. */
+body > main {
+    flex: 1 0 auto;
+    padding-bottom: 110px;
+}
+
+/* Строка требований, как в тултипе предмета. */
+.tip__req {
+    margin: 12px 0 0;
+    font-size: 14px;
+    color: var(--ink-dim);
+}
+
+/* Ниша под снимок, которого ещё нет: подпись говорит, что тут будет, поэтому
+   недостающие кадры видно на самой странице, а не в списке задач. */
+.shot.is-empty a { display: none; }
+.shot.is-empty::before {
+    content: attr(data-empty);
+    display: grid;
+    place-items: center;
+    min-height: 220px;
+    padding: 24px;
+    border: 1px dashed var(--edge);
+    border-radius: var(--r);
+    color: var(--ink-dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    line-height: 1.9;
+    text-align: center;
+    text-transform: uppercase;
+    opacity: .55;
+}
+
+/* Заголовок над справочным списком игр: он не раздел, а подпись под ним. */
+.games__head {
+    margin: 48px 0 0;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink-dim);
+}
+
+/* === Материал ============================================================
+   Текстуры не нарисованы для сайта и не взяты у клиента: это файлы из art/
+   самой Аркады — дерево стола, кладка, плетёнка под плитками меню и рамка
+   карточки. Они белые, аддон красит их цветом темы; сюда они приезжают
+   через tools/tex.mjs — рисунок в прозрачности, тон задаётся фоном под ним. */
+
+/* Кладка по всему сайту: едва видна и гаснет книзу, чтобы не спорить с
+   текстом. Швы запечены в прозрачность заранее (tools/tex.mjs): фильтр и
+   смешивание слоёв на весь экран заметно тормозили отрисовку. */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1100px;
+    z-index: -1;
+    background: url(/assets/tex/stone_lines.png) 0 0 / 256px;
+    opacity: .22;
+    -webkit-mask-image: linear-gradient(180deg, #000 0, transparent);
+    mask-image: linear-gradient(180deg, #000 0, transparent);
+    pointer-events: none;
+}
+
+/* У Аркады свечение тёплое: её окно — дерево и золото, а не лёд. */
+.page--arcade {
+    background:
+        radial-gradient(1200px 700px at 78% -10%, rgba(200, 164, 100, .13), transparent 62%),
+        radial-gradient(900px 600px at 8% 8%, rgba(163, 53, 238, .08), transparent 60%),
+        var(--void);
+}
+
+code {
+    padding: 1px 6px;
+    border: 1px solid var(--edge);
+    border-radius: 2px;
+    background: rgba(4, 6, 10, .7);
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: .86em;
+    white-space: nowrap;
+}
+
+/* Тултип и карточка: плетёнка из меню аддона и светлая кромка сверху, как у
+   рамок клиента. */
+.tip,
+.card,
+.bonus {
+    background-image: url(/assets/tex/weave_soft.png);
+    background-size: 64px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 236, 190, .07),
+        0 24px 60px rgba(0, 0, 0, .55);
+}
+
+.btn { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 1px 0 rgba(0, 0, 0, .6); }
+
+.btn--primary {
+    background:
+        url(/assets/tex/wood_lines.png) 0 0 / 128px,
+        linear-gradient(180deg, #6b4f25, #3a2a12);
+    border-color: rgba(200, 164, 100, .7);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .6);
+}
+.btn--primary:hover { border-color: #e6c583; }
+
+/* Отбивка между разделами: волосок с ромбом, как разделитель в тултипе. */
+.hub__more::before,
+.features::before,
+.talk::before {
+    content: "◆";
+    display: block;
+    margin: 0 0 64px;
+    color: var(--gold);
+    font-size: 9px;
+    line-height: 1px;
+    text-align: center;
+    background: linear-gradient(90deg, transparent, var(--edge) 20%, var(--edge) 46%, transparent 48%, transparent 52%, var(--edge) 54%, var(--edge) 80%, transparent);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+}
+
+/* --- Аркада: первый экран -------------------------------------------------- */
+
+/* Значок аддона — он же логотип. 64 точки исходника делятся на 32 нацело,
+   поэтому в шапке он остаётся резким. */
+.mark__icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.tip__icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    vertical-align: -10px;
+}
+
+/* Окну аркады нужна половина экрана: плитки меню мельче не читаются. */
+.page--arcade .hero { grid-template-columns: 1fr 1fr; gap: 48px; }
+.page--arcade .hero h1 { font-size: clamp(38px, 5vw, 58px); }
+
+/* Снимок окна целиком: у окна своя рама, паспарту вокруг неё — лишняя. */
+.shot--window a {
+    padding: 0;
+    border: 0;
+    background: none;
+    overflow: visible;
+}
+.shot--window img {
+    border-radius: 4px;
+    box-shadow:
+        0 0 0 1px rgba(200, 164, 100, .25),
+        0 30px 80px rgba(0, 0, 0, .7),
+        0 0 120px rgba(200, 164, 100, .10);
+    transform: rotate(.6deg);
+    transition: transform .25s;
+}
+.shot--window a:hover img { transform: none; }
+
+/* --- Аркада: полка с играми ------------------------------------------------ */
+/* Полоса во всю ширину из того же дерева, что стол в аддоне. */
+
+.shelf {
+    margin-top: 96px;
+    padding: 84px 0 92px;
+    border-top: 1px solid rgba(200, 164, 100, .38);
+    border-bottom: 1px solid rgba(200, 164, 100, .38);
+    background:
+        url(/assets/tex/wood_lines.png) 0 0 / 192px,
+        linear-gradient(180deg, #35261a, #1c140c);
+    box-shadow:
+        inset 0 60px 80px -60px rgba(0, 0, 0, .8),
+        inset 0 -60px 80px -60px rgba(0, 0, 0, .8);
+}
+
+.shelf__in {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.shelf .lede { color: #b8ad98; max-width: 60ch; margin-top: 0; }
+
+.frames {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px 22px;
+    margin-top: 44px;
+}
+
+/* Рамка карточки из аддона: art/card_frame.tga. Кант 15 точек, снизу под
+   кантом пергаментная полоса 33 точки — в аддоне на ней имя карты, здесь имя
+   игры. Ширины рамки равны срезам, чтобы пиксели встали один в один. */
+.frame {
+    position: relative;
+    margin: 0;
+    border-style: solid;
+    border-width: 15px 15px 48px;
+    border-image: url(/assets/tex/card_frame.png) 15 15 48 15 round;
+    background: #05070b;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .55);
+    transition: transform .18s;
+}
+.frame:hover { transform: translateY(-3px); }
+
+.frame a { display: block; line-height: 0; }
+
+.frame img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: 50% 0;
+}
+
+.frame figcaption {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 33px;
+    color: #3a2912;
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 33px;
+    text-align: center;
+}
+
+.shelf .games__head { color: #b8ad98; }
+
+/* Плитки как в меню аддона: тёмное дно, кант, светлая кромка. */
+.gtiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.gtile {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 10px;
+    align-content: start;
+    padding: 14px 16px 15px;
+    border: 1px solid #4a3a24;
+    border-radius: var(--r);
+    background: rgba(10, 7, 4, .62);
+    box-shadow: inset 0 1px 0 rgba(255, 236, 190, .06);
+}
+
+.gtile b {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 400;
+    color: #f0dfb8;
+}
+
+.gtile i {
+    align-self: center;
+    padding: 1px 7px;
+    border: 1px solid rgba(30, 255, 0, .35);
+    border-radius: 2px;
+    color: var(--uncommon);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.gtile span {
+    grid-column: 1 / -1;
+    color: #a89c86;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* --- Аркада: вдвоём, оформление, установка --------------------------------- */
+
+.pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 36px;
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 34px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.facts li {
+    padding: 7px 14px;
+    border: 1px solid var(--edge);
+    border-radius: 2px;
+    background: var(--panel);
+    color: var(--ink-dim);
+    font-size: 14px;
+}
+
+.steps {
+    display: grid;
+    gap: 14px;
+    max-width: 70ch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+.steps li {
+    position: relative;
+    padding-left: 52px;
+    counter-increment: step;
+}
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: -3px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(200, 164, 100, .55);
+    border-radius: 2px;
+    background: rgba(200, 164, 100, .08);
+    color: var(--gold);
+    font-family: var(--display);
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+}
+
+.beta {
+    max-width: 70ch;
+    margin-top: 40px;
+    padding: 22px 26px;
+    border: 1px dashed rgba(200, 164, 100, .45);
+    border-radius: var(--r);
+    background: rgba(200, 164, 100, .04);
+    color: var(--ink-dim);
+    font-size: 15px;
+}
+.beta p { margin: 0; }
+.beta .badge { margin-bottom: 8px; }
+
+@media (max-width: 900px) {
+    .top { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .top__nav { justify-content: flex-start; }
+    .frames { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+    .pair { grid-template-columns: 1fr; gap: 26px; }
+    .page--arcade .hero { grid-template-columns: 1fr; }
+    .shot--window img { transform: none; }
+    .shelf { padding: 60px 0 68px; }
+}
+
+@media (max-width: 520px) {
+    .frames { grid-template-columns: 1fr; }
+}
+
+/* Четыре пункта в три колонки оставляли сироту во втором ряду. */
+.page--arcade .feats--wide { grid-template-columns: repeat(2, 1fr); gap: 40px 64px; }
+.page--arcade .feats--wide .feat p { max-width: 54ch; }
+
+/* Сразу под полкой отбивка лишняя: кромка полки уже отбивает. */
+.shelf + .features::before { display: none; }
+
+.badge--live { color: var(--uncommon); }
+
+@media (max-width: 900px) {
+    .page--arcade .feats--wide { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* --- Аркада: клиенты, команды, сцена вдвоём -------------------------------- */
+
+.clients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+.clients li {
+    padding: 5px 11px;
+    border: 1px dashed var(--edge);
+    border-radius: 2px;
+    color: var(--ink-dim);
+}
+.clients .clients__on {
+    border: 1px solid rgba(30, 255, 0, .35);
+    color: var(--uncommon);
+}
+.clients .clients__on::before { content: "✓ "; }
+
+/* Команды поданы как окно чата: моноширинный ввод слева, что он делает —
+   справа. На месте полосы «когда пригодится»: тот же ритм, но с пользой. */
+.cmds {
+    max-width: var(--w);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.cmds__head {
+    margin: 0 0 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.cmds__list {
+    margin: 0;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: rgba(4, 6, 10, .8) url(/assets/tex/weave_soft.png) 0 0 / 64px;
+    box-shadow: inset 0 1px 0 rgba(255, 236, 190, .07);
+}
+
+.cmds__list > div {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 18px;
+    align-items: baseline;
+    padding: 14px 22px;
+    border-top: 1px solid var(--edge);
+}
+.cmds__list > div:first-child { border-top: 0; }
+
+.cmds__list dt code {
+    border: 0;
+    padding: 0;
+    background: none;
+    font-size: 15px;
+}
+.cmds__list dd { margin: 0; color: var(--ink-dim); font-size: 15px; }
+
+.cmds__ids {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+    color: #6f7686;
+    word-spacing: .5em;
+}
+
+.scene {
+    margin: 36px 0 0;
+    border: 1px solid rgba(200, 164, 100, .38);
+    border-radius: var(--r);
+    background: #120b26;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+    overflow: hidden;
+}
+.scene img { display: block; width: 100%; height: auto; }
+.flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin: 34px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: flow;
+}
+.flow li {
+    position: relative;
+    padding-top: 44px;
+    color: var(--ink-dim);
+    font-size: 15px;
+    counter-increment: flow;
+}
+.flow li::before {
+    content: counter(flow);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(30, 255, 0, .4);
+    border-radius: 50%;
+    color: var(--uncommon);
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+}
+/* Пунктир между шагами — тот же, что летит между окнами на картинке. */
+.flow li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 42px;
+    right: -16px;
+    border-top: 2px dotted rgba(30, 255, 0, .3);
+}
+.flow b {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.duo__req {
+    margin: 30px 0 0;
+    padding-left: 14px;
+    border-left: 2px solid var(--gold);
+    color: var(--ink-dim);
+    font-size: 15px;
+}
+
+@media (max-width: 900px) {
+    .cmds__list > div { grid-template-columns: 1fr; gap: 4px; }
+    .flow { grid-template-columns: 1fr; gap: 20px; }
+    .flow li::after { display: none; }
+}
+
+
+/* --- просмотр снимка ---------------------------------------------------------
+   Штатный <dialog>: фокус, Esc и затемнение даёт браузер, своего кода — только
+   подставить картинку. Без скрипта ссылка работает как раньше и открывает файл. */
+
+.zoom {
+    max-width: none;
+    max-height: none;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+}
+.zoom::backdrop { background: rgba(3, 4, 8, .9); }
+
+.zoom__body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    gap: 14px;
+    width: 100%;
+    height: 100%;
+    padding: 28px 72px 22px;
+    cursor: zoom-out;
+}
+
+.zoom__img {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(200, 164, 100, .3), 0 30px 90px #000;
+    cursor: default;
+}
+
+.zoom__cap {
+    margin: 0;
+    color: var(--ink-dim);
+    font-family: var(--display);
+    font-size: 20px;
+}
+
+.zoom__btn {
+    position: absolute;
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    margin-top: -24px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: rgba(16, 19, 27, .9);
+    color: var(--ink);
+    font-size: 20px;
+    cursor: pointer;
+}
+.zoom__btn:hover { border-color: var(--gold); }
+.zoom__btn--prev { left: 14px; }
+.zoom__btn--next { right: 14px; }
+.zoom__btn--close { top: 14px; right: 14px; margin: 0; }
+.zoom__btn[hidden] { display: none; }
+
+.shot a, .frame a { cursor: zoom-in; }
+
+@media (max-width: 700px) {
+    .zoom__body { padding: 64px 10px 16px; }
+    .zoom__btn--prev, .zoom__btn--next { top: auto; bottom: 12px; }
+}
+
+/* Имя аддона длиннее слова «manacode»: тем же кеглем оно выталкивало меню на
+   вторую строку уже на ноутбучной ширине. */
+.page--arcade .mark__word { font-size: 18px; letter-spacing: .12em; }
+
+.foot p a { color: var(--gold); }
+
+/* --- установка по клиентам ------------------------------------------------- */
+
+.setup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 34px;
+}
+
+.setup__card {
+    padding: 24px 26px 26px;
+    border: 1px solid var(--edge);
+    border-radius: var(--r);
+    background: rgba(4, 6, 10, .8) url(/assets/tex/weave_soft.png) 0 0 / 64px;
+    box-shadow: inset 0 1px 0 rgba(255, 236, 190, .07);
+}
+
+.setup__card h3 {
+    margin: 0 0 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--uncommon);
+}
+
+/* Путь длинный и без пробелов: своя строка, а в узкой карточке — перенос. */
+.setup__card .path {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 6px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+#install .lede { max-width: 62ch; margin-top: 0; }
+
+@media (max-width: 900px) {
+    .setup { grid-template-columns: 1fr; }
+}
+
+/* Переключатель языка: рамка отличает его от пунктов меню — это не раздел
+   страницы, а другая страница. */
+.top__nav .lang {
+    padding: 1px 8px;
+    border: 1px solid var(--edge);
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    line-height: 20px;
+}
+.top__nav .lang:hover { border-color: var(--gold); }
+
+/* Тайл-заглушка: места под аддон столько же, но он не спорит с готовым. */
+.tip--soon { border-style: dashed; box-shadow: none; opacity: .8; }
+.tip--soon .tip__name { color: var(--ink-dim); }
+
+/* === Raid Helper и Vendor ===================================================
+   Страницы собраны из тех же деталей, что Аркада: герой со снимком окна,
+   полка кадров, список возможностей, установка. Меняется материал: у этих
+   аддонов окна тёмные, а не деревянные, поэтому полка — тёмная кладка. */
+
+/* Raid Helper: синий с его значка и золото рамок окна. */
+.page--raidhelper {
+    background:
+        radial-gradient(1200px 700px at 78% -10%, rgba(51, 153, 255, .12), transparent 62%),
+        radial-gradient(900px 600px at 8% 8%, rgba(200, 164, 100, .08), transparent 60%),
+        var(--void);
+}
+
+/* Vendor: золото монет и синий редких вещей на прилавке. */
+.page--vendor {
+    background:
+        radial-gradient(1200px 700px at 78% -10%, rgba(200, 164, 100, .12), transparent 62%),
+        radial-gradient(900px 600px at 8% 8%, rgba(0, 112, 221, .10), transparent 60%),
+        var(--void);
+}
+
+/* Значок нарисован крупно и уменьшен: пиксельная отрисовка его бы искрошила. */
+.mark__icon--smooth { image-rendering: auto; }
+
+.page--raidhelper .mark__word,
+.page--vendor .mark__word { font-size: 18px; letter-spacing: .12em; }
+
+/* Окно разбора широкое и мелкое: снимку нужно больше места, чем тексту. */
+.page--raidhelper .hero { grid-template-columns: .8fr 1.2fr; gap: 48px; }
+.page--vendor .hero { grid-template-columns: 1fr 1fr; gap: 48px; }
+.page--raidhelper .hero h1,
+.page--vendor .hero h1 { font-size: clamp(36px, 4.6vw, 54px); }
+
+/* Рама окна у этих аддонов тёмная — свечение под ней холоднее, чем у Аркады. */
+.page--raidhelper .shot--window img,
+.page--vendor .shot--window img {
+    box-shadow:
+        0 0 0 1px rgba(200, 164, 100, .3),
+        0 30px 80px rgba(0, 0, 0, .7),
+        0 0 120px rgba(51, 153, 255, .10);
+}
+
+/* Полка из тёмной кладки вместо дерева. */
+.shelf--dark {
+    border-color: rgba(200, 164, 100, .28);
+    /* Швы запечены непрозрачными: без слоя сверху кладка спорила с кадрами. */
+    background:
+        linear-gradient(rgba(11, 14, 20, .78), rgba(11, 14, 20, .78)),
+        url(/assets/tex/stone_lines.png) 0 0 / 256px,
+        linear-gradient(180deg, #161b25, #0b0e14);
+}
+.shelf--dark .lede,
+.shelf--dark .games__head { color: var(--ink-dim); }
+
+/* Окна разбора широкие: срез 5:4 оставлял от них левый угол. */
+.frames--wide img { aspect-ratio: 16 / 10; }
+.frames--three { grid-template-columns: repeat(3, 1fr); }
+
+.page--raidhelper .feats--wide,
+.page--vendor .feats--wide { grid-template-columns: repeat(2, 1fr); gap: 40px 64px; }
+.page--raidhelper .feats--wide .feat p,
+.page--vendor .feats--wide .feat p { max-width: 54ch; }
+
+.setup__card .btn { margin-top: 22px; }
+
+@media (max-width: 900px) {
+    .page--raidhelper .hero,
+    .page--vendor .hero { grid-template-columns: 1fr; }
+    .page--raidhelper .feats--wide,
+    .page--vendor .feats--wide { grid-template-columns: 1fr; gap: 24px; }
+    .frames--three { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+    .frames--three { grid-template-columns: 1fr; }
+}

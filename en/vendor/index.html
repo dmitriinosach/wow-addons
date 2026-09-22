@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendor — every item the merchant sells, in one window, for WoW 3.3.5a</title>
+<meta name="description" content="Vendor is a World of Warcraft 3.3.5a addon: the whole merchant stock in one scrollable list instead of pages of ten. Sets by slot, groups, a &quot;not for me&quot; filter, bulk buy x5/x20/x100 and emblem exchange chains in one click.">
+<link rel="canonical" href="https://wow-addons.manacode.su/en/vendor/">
+<link rel="alternate" hreflang="ru" href="https://wow-addons.manacode.su/vendor/">
+<link rel="alternate" hreflang="en" href="https://wow-addons.manacode.su/en/vendor/">
+<link rel="alternate" hreflang="x-default" href="https://wow-addons.manacode.su/en/vendor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vendor — the whole merchant stock in one window">
+<meta property="og:description" content="No more pages of ten: sets, groups, a filter, bulk buy and emblem exchange. WoW 3.3.5a.">
+<meta property="og:url" content="https://wow-addons.manacode.su/en/vendor/">
+<meta property="og:image" content="https://wow-addons.manacode.su/assets/vendor/emblems.jpg">
+<link rel="icon" type="image/svg+xml" href="/assets/vendor/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112932449', 'ym');
+
+    ym(112932449, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112932449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body class="page--vendor">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+    <a class="mark" href="#top">
+        <img class="mark__icon mark__icon--smooth" src="/assets/vendor/icon.svg" width="32" height="32" alt="">
+        <span class="mark__word">Vendor</span>
+    </a>
+    <nav class="top__nav">
+        <a href="#shots">Screenshots</a>
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-Vendor">GitHub</a>
+        <a class="lang" href="/vendor/" hreflang="ru" lang="ru">RU</a>
+    </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+    <div class="hero__text">
+        <p class="eyebrow">
+            WoW 3.3.5a addon &middot; version 0.1
+        </p>
+        <h1>Every item the merchant sells, in one window.</h1>
+        <p class="lede">
+            Instead of pages of ten — one scrollable list, sorted into groups
+            that make sense for that particular merchant. It opens by itself
+            when you talk to a merchant.
+        </p>
+        <div class="hero__cta">
+            <a class="btn btn--primary" href="https://github.com/dmitriinosach/-MANACODE-Vendor/releases/latest">Download</a>
+            <a class="btn" href="#install">How to install</a>
+        </div>
+        <ul class="clients" aria-label="Supported clients">
+            <li class="clients__on">3.3.5a &middot; WotLK</li>
+            <li class="clients__on">English and Russian</li>
+        </ul>
+    </div>
+
+    <figure class="shot shot--window" data-empty="set merchant">
+        <a href="/assets/vendor/sets.jpg" target="_blank" rel="noopener">
+            <img src="/assets/vendor/sets.jpg" width="1434" height="1298" alt="Set merchant: Scourgelord armor by slot, T10.1, T10.2 and T10.3 side by side, check marks on what you already own">
+        </a>
+    </figure>
+</section>
+
+<section class="cmds" id="cmds" aria-label="Commands">
+    <h2 class="cmds__head">Commands</h2>
+    <dl class="cmds__list">
+        <div>
+            <dt><code>/vendor off</code></dt>
+            <dd>Bring back the stock merchant window. Back again — <code>/vendor on</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor theme flat</code></dt>
+            <dd>Flat dark theme. Client textures — <code>/vendor theme vanilla</code>.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor reset</code></dt>
+            <dd>Forget window sizes for every merchant.</dd>
+        </div>
+        <div>
+            <dt><code>/vendor about</code></dt>
+            <dd>Version, links and other manacode addons. Plain <code>/vendor</code> — addon status.</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="shelf shelf--dark" id="shots" aria-label="Screenshots">
+    <div class="shelf__in">
+        <h2 class="h-section">Every merchant gets its own layout</h2>
+        <p class="lede">
+            Groups are picked from the goods, not from the merchant's name:
+            emblems, gems, recipes and mounts are each laid out their own way.
+            Screenshots are from a Russian client; the addon speaks English too.
+        </p>
+
+        <div class="frames frames--three">
+            <figure class="frame">
+                <a href="/assets/vendor/emblems.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/emblems.jpg" alt="Emblem of Frost rewards: exchange, the A7 gladiator set, armor by type, cloaks" loading="lazy">
+                </a>
+                <figcaption>Emblems</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/gems.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/gems.jpg" alt="Jewelcrafting designs: red, yellow, green and meta gems in columns" loading="lazy">
+                </a>
+                <figcaption>Jewelcrafting</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/recipes.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/recipes.jpg" alt="Enchanting formula merchant: groups by slot, red when your skill is too low" loading="lazy">
+                </a>
+                <figcaption>Recipes</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/exchange.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/exchange.jpg" alt="Exchange chain: Emblems of Heroism to Valor to Conquest in one window" loading="lazy">
+                </a>
+                <figcaption>Emblem exchange</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/filter.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/filter.jpg" alt="Filter and view: not for me — other class, profession, stats, ammo" loading="lazy">
+                </a>
+                <figcaption>Filter</figcaption>
+            </figure>
+            <figure class="frame">
+                <a href="/assets/vendor/mounts.jpg" target="_blank" rel="noopener">
+                    <img src="/assets/vendor/mounts.jpg" alt="Mount merchant: speed right under the name" loading="lazy">
+                </a>
+                <figcaption>Mounts</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="h-section"><span class="h-section__num">Features</span> Find it, check it, buy it</h2>
+
+    <ol class="feats feats--wide">
+        <li class="feat">
+            <h4>Sets as a grid</h4>
+            <p>
+                Tier and arena pieces are collected into their set: one row per
+                slot, upgrade steps side by side, short labels like T10.2 and A7.
+                Repeated words are trimmed — the full name stays in the tooltip
+                and in search.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Groups for the merchant</h4>
+            <p>
+                Gems by color, armor by type, recipes by what they make, a
+                quartermaster's goods by reputation rank. Name search also handles
+                the wrong keyboard layout.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>"Not for me" filter</h4>
+            <p>
+                Other classes, the wrong armor and stats, other professions'
+                reagents, old ranks, weak food. Tick it once — only your things
+                stay on the counter.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>What you own, what you can afford</h4>
+            <p>
+                A check mark on what is in your bags, bank or equipped. The price
+                turns red when you are short, and the "Used for" tooltip tells
+                which recipe needs a reagent.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Bulk x5, x20, x100</h4>
+            <p>
+                Hover an item for the bulk buttons. Before you buy you see how
+                many stacks land in your bags and the total price.
+            </p>
+        </li>
+        <li class="feat">
+            <h4>Emblem exchange in one click</h4>
+            <p>
+                The whole path to the emblem or item you want — in one row.
+                Emblems you already hold midway are used first.
+            </p>
+        </li>
+    </ol>
+
+    <ul class="facts">
+        <li>Sell gray junk</li>
+        <li>Buyback on its own tab</li>
+        <li>Repair with your gold or the guild bank</li>
+        <li>Emblem refunds on right-click, Bagnon too</li>
+        <li>Tiles or rows, two themes</li>
+        <li>Window size per merchant</li>
+    </ul>
+</section>
+
+<section class="hub__more" id="install" aria-label="Install">
+    <h2 class="h-section"><span class="h-section__num">Install</span> How to install</h2>
+    <p class="lede">
+        Two ways: the updater installs and updates for you, the archive is by hand.
+    </p>
+
+    <div class="setup">
+        <article class="setup__card">
+            <h3>ManacodeUpdate</h3>
+            <ol class="steps">
+                <li>Download and run the updater.</li>
+                <li>Press Install next to Vendor.</li>
+                <li>Log in and talk to a merchant.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Update/releases/latest">Download the updater</a>
+        </article>
+        <article class="setup__card">
+            <h3>By hand</h3>
+            <ol class="steps">
+                <li>Download the archive from the release page.</li>
+                <li>Unpack it here: <code class="path">game folder\Interface\AddOns</code></li>
+                <li>Fully restart the game and talk to a merchant.</li>
+            </ol>
+            <a class="btn" href="https://github.com/dmitriinosach/-MANACODE-Vendor/releases/latest">Releases on GitHub</a>
+        </article>
+    </div>
+
+    <div class="beta">
+        <p class="badge">Feedback</p>
+        <p>
+            A few players use it so far, and it grows from their feedback. Bugs,
+            oddities and ideas — in
+            <a href="https://discord.gg/CYnxS6R9qY">Discord</a> or in
+            <a href="https://github.com/dmitriinosach/-MANACODE-Vendor/issues">GitHub issues</a>.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <p class="foot__mark">Vendor</p>
+    <p>Made by manacode. Not affiliated with Blizzard Entertainment.</p>
+    <nav class="foot__nav">
+        <a href="/en/">Other manacode addons</a>
+        <a href="https://discord.gg/CYnxS6R9qY">Discord</a>
+        <a href="https://github.com/dmitriinosach/-MANACODE-Vendor">GitHub</a>
+    </nav>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>
